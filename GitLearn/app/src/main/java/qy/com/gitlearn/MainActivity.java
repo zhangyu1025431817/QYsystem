@@ -18,7 +18,9 @@ public class MainActivity extends AppCompatActivity {
     private void done(){
 
     }
-    private void thrid(){
-        
+
+    private void thrid() {
+    
     }
+
 }
