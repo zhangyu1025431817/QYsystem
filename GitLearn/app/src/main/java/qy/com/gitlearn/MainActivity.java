@@ -15,4 +15,10 @@ public class MainActivity extends AppCompatActivity {
     private void init(){
 
     }
+    private void done(){
+
+    }
+    private void first(){
+        
+    }
 }
