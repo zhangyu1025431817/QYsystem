@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 初始等待页面 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_loading">
+
+    <TextView
+        android:id="@+id/loading_textView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="123"
+        android:gravity="center"
+        android:padding="20px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="300px"
+        android:textColor="@color/colorWhite"
+        android:textSize="30px"
+        />
+
+    <com.qy.business.view.GifView
+        android:id="@+id/_gif_view"
+        app:gif="@drawable/loading"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dip"
+        android:enabled="false" />
+</RelativeLayout>

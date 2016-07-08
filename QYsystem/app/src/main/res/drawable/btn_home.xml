@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 2.按下时的样子 -->
+    <item
+        android:state_focused="false"
+        android:state_pressed="true"
+        android:drawable="@drawable/home_on"
+        />
+    <!-- 1.正常显示的样子 -->
+    <item android:drawable="@drawable/home_off"/>
+</selector>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="maintype_id">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+    <string-array name="maintype_name">
+        <item>社区服务</item>
+        <item>家电维修</item>
+        <item>教育培训</item>
+        <item>家政服务</item>
+        <item>租赁经营</item>
+        <item>餐饮服务</item>
+        <item>美容美发</item>
+        <item>加工制作</item>
+        <item>种植业</item>
+        <item>养殖业</item>
+        <item>农家乐</item>
+        <item>货运服务</item>
+    </string-array>
+
+    <attr name="visible_tab_count" format="integer"></attr>
+
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="visible_tab_count" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">奇易商家</string>
+
+    <string name="account_login">账号登录</string>
+    <string name="_login">登录</string>
+    <string name="enter_user_name">用户名</string>
+    <string name="enter_password">密码</string>
+    <string name="fast_register">快速注册</string>
+    <string name="_register">注册</string>
+    <string name="new_enter_shop">新进驻的供应商:</string>
+    <string name="safe_password">安全密码:</string>
+    <string name="phone_number">手机号码:</string>
+    <string name="message_authentication_code">短信验证码:</string>
+    <string name="get_authentication_code">获取验证码</string>
+    <string name="bind_phone_number">绑定手机号码</string>
+    <string name="bind_success">绑定成功!</string>
+    <string name="_commit">提交</string>
+    <string name="_return">返回</string>
+    <string name="safe_password_not_be_null">安全密码不能为空!</string>
+    <string name="phone_number_not_be_null">手机号码不能为空!</string>
+    <string name="please_input_correct_phone_number">请输入正确的手机号码!</string>
+    <string name="message_code_not_be_null">验证码不能为空!</string>
+    <string name="get_again">秒后重新获取</string>
+    <string name="action_search">搜索</string>
+    <string name="action_setting">设置</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_closed">closed</string>
+
+    <!--Toast-->
+    <string name="account_password_not_null">用户名或密码不能为空!</string>
+    <!--网络-->
+    <string name="_login_ing">正在登录...</string>
+    <string name="_commit_ing">正在提交...</string>
+    <string name="please_check_net">请检查网络！</string>
+    <string name="json_error">数据解析异常！</string>
+    <string name="user_name">用 户 名:</string>
+</resources>
