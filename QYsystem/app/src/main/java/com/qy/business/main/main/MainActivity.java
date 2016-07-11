@@ -47,6 +47,9 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
         tv_name = (TextView) headerView.findViewById(R.id.tv_name);
     }
 
+    public void onCheck(){
+
+    }
     @Override
     public void onBackPressed() {
         if (dlMainDrawer.isDrawerOpen(Gravity.LEFT)) dlMainDrawer.closeDrawers();
