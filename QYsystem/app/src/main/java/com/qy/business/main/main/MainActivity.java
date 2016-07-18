@@ -1,39 +1,52 @@
 package com.qy.business.main.main;
 
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.qy.business.R;
 import com.qy.business.main.base.BaseActivity;
+import com.qy.business.main.home.HomeFragment;
+import com.qy.business.main.purchase.PurchaseFragment;
+import com.qy.business.main.sell.SellFragment;
+import com.qy.business.main.service.ServiceFragment;
 
 import butterknife.Bind;
 
-public class MainActivity extends BaseActivity<MainPresenter, MainModel> implements MainContract.View,RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends BaseActivity<MainPresenter, MainModel> implements MainContract.View {
     @Bind(R.id.ll_title)
     Toolbar toolbar;
     @Bind(R.id.toolbar_title)
     TextView title;
     @Bind(R.id.viewpager)
-    ViewPager viewpager;
+    ViewPager mViewpager;
     @Bind(R.id.nv_main_navigation)
     NavigationView nvMainNavigation;
     @Bind(R.id.dl_main_drawer)
     DrawerLayout dlMainDrawer;
-    @Bind(R.id.rg_nav_bottom)
-    RadioGroup radioGroup;
+    //    @Bind( R.id.rg_nav_bottom)
+//    RadioGroup radioGroup;
+    @Bind(R.id.tabLayout)
+    TabLayout mTabLayout;
+    TabLayout.Tab mTOne, mTTwo, mTThree, mTFour;
     ImageView im_face;
     TextView tv_name;
     private int[] mTitles = new int[]{R.string.home_system, R.string.sell_system, R.string.purchase_system, R.string.qy_service};
+    private int[] mNormalDrawables = new int[]{R.drawable.icon_home_n, R.drawable.icon_sell_n, R.drawable.icon_purchase_n, R.drawable.icon_service_n};
+    private int[] mSelectDrawables = new int[]{R.drawable.icon_home_p, R.drawable.icon_sell_p, R.drawable.icon_purchase_p, R.drawable.icon_service_p};
 
     @Override
     public int getLayoutId() {
@@ -47,8 +60,9 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
         toolbar.setNavigationIcon(R.drawable.icon_user);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         title.setText(mTitles[0]);
-        radioGroup.check(R.id.rb_home);
-        radioGroup.setOnCheckedChangeListener(this);
+
+        initViewPager();
+
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, dlMainDrawer, R.string.drawer_open, R.string.drawer_closed);
         mDrawerToggle.syncState();
         dlMainDrawer.addDrawerListener(mDrawerToggle);
@@ -60,6 +74,79 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
 
     }
 
+    private void initViewPager() {
+        mViewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+
+            @Override
+            public Fragment getItem(int position) {
+                switch (position) {
+                    case 0:
+                        return new HomeFragment();
+                    case 1:
+                        return new SellFragment();
+                    case 2:
+                        return new PurchaseFragment();
+                    case 3:
+                        return new ServiceFragment();
+                    default:
+                        return new HomeFragment();
+
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return mTitles.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return getString(mTitles[position]);
+            }
+
+        });
+        mTabLayout.setupWithViewPager(mViewpager);
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewpager.setCurrentItem((Integer) tab.getTag());
+                TextView tv = (TextView) tab.getCustomView();
+                Drawable drawable = getResources().getDrawable(mSelectDrawables[(int) tab.getTag()]);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                tv.setCompoundDrawables(null, drawable, null, null);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                TextView tv = (TextView) tab.getCustomView();
+                Drawable drawable = getResources().getDrawable(mNormalDrawables[(int) tab.getTag()]);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                tv.setCompoundDrawables(null, drawable, null, null);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = mTabLayout.getTabAt(i);
+            if (tab != null) {
+                tab.setCustomView(getTabView(i));
+                tab.setTag(i);
+            }
+        }
+    }
+
+    private View getTabView(int position) {
+        View v = LayoutInflater.from(this).inflate(R.layout.tab_main_bottom, null);
+        TextView rb = (TextView) v.findViewById(R.id.rb);
+        rb.setText(mTitles[position]);
+        Drawable drawable = getResources().getDrawable(mNormalDrawables[position]);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        rb.setCompoundDrawables(null, drawable, null, null);
+        return rb;
+    }
 
     @Override
     public void onBackPressed() {
@@ -89,17 +176,4 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
 
     }
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId){
-            case R.id.rb_home:
-                break;
-            case R.id.rb_sell:
-                break;
-            case R.id.rb_purchase:
-                break;
-            case R.id.rb_service:
-                break;
-        }
-    }
 }

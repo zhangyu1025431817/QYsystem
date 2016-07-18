@@ -13,65 +13,20 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/rg_nav_bottom"
+        android:layout_above="@+id/tabLayout"
         android:layout_below="@id/ll_title"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <RadioGroup
-        android:id="@+id/rg_nav_bottom"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#f6f9ff"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rb_home"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/cb_home_icon"
-            android:gravity="center"
-            android:padding="10px"
-            android:text="@string/home_system"
-            android:textSize="20px" />
-
-        <RadioButton
-            android:id="@+id/rb_sell"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/cb_sell_icon"
-            android:gravity="center"
-            android:padding="10px"
-            android:text="@string/sell_system"
-            android:textSize="20px" />
-
-        <RadioButton
-            android:id="@+id/rb_purchase"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/cb_purchase_icon"
-            android:gravity="center"
-            android:padding="10px"
-            android:text="@string/purchase_system"
-            android:textSize="20px" />
-
-        <RadioButton
-            android:id="@+id/rb_service"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/cb_service_icon"
-            android:gravity="center"
-            android:padding="10px"
-            android:text="@string/qy_service"
-            android:textSize="20px" />
-    </RadioGroup>
+        android:layout_height="100px"
+        app:tabGravity="fill"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="#FF4081"
+        app:tabTextColor="@color/black">
+    </android.support.design.widget.TabLayout>
 
 </com.zhy.autolayout.AutoRelativeLayout>
