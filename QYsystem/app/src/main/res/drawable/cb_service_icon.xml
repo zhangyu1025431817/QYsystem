@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 按下时的样子 -->
+    <item android:drawable="@drawable/icon_service_p" android:state_checked="true" android:state_enabled="true"/>
+
+    <!-- 正常显示的样子 -->
+    <item android:drawable="@drawable/icon_service_n"/>
+</selector>
