@@ -12,10 +12,10 @@ public class RegisterPresenter extends RegisterMvp.Presenter {
 
     @Override
     public void loadProvinceInfo() {
-        mModel.getRegion("",new RegisterMvp.Model.OnRequestListener() {
+        mRxManager.add(mModel.getRegion("", new RegisterMvp.Model.OnRequestListener() {
             @Override
             public void onSucceed(Object o) {
-                List<Region_all> list = (List<Region_all>)o;
+                List<Region_all> list = (List<Region_all>) o;
                 mView.showProvince(list);
             }
 
@@ -23,30 +23,30 @@ public class RegisterPresenter extends RegisterMvp.Presenter {
             public void onError(String msg) {
 
             }
-        });
+        }));
     }
 
     @Override
     public void loadCityInfo(String id) {
-        mModel.getRegion(id,new RegisterMvp.Model.OnRequestListener() {
+        mRxManager.add(mModel.getRegion(id, new RegisterMvp.Model.OnRequestListener() {
             @Override
             public void onSucceed(Object o) {
-                List<Region_all> list = (List<Region_all>)o;
+                List<Region_all> list = (List<Region_all>) o;
                 mView.showCity(list);
             }
 
             @Override
             public void onError(String msg) {
             }
-        });
+        }));
     }
 
     @Override
     public void loadAreaInfo(String id) {
-        mModel.getRegion(id,new RegisterMvp.Model.OnRequestListener() {
+        mRxManager.add(mModel.getRegion(id, new RegisterMvp.Model.OnRequestListener() {
             @Override
             public void onSucceed(Object o) {
-                List<Region_all> list = (List<Region_all>)o;
+                List<Region_all> list = (List<Region_all>) o;
                 mView.showArea(list);
             }
 
@@ -54,13 +54,13 @@ public class RegisterPresenter extends RegisterMvp.Presenter {
             public void onError(String msg) {
 
             }
-        });
+        }));
     }
 
 
     @Override
     public void register(String userName, String password, String province, String city, String area, String identityId, String fullName, String phone, String com_name, String com_address, String cer_num, String comtype_id, String maintype) {
-        mModel.register(userName, password, province, city, area, identityId, fullName, phone, com_name, com_address, cer_num, comtype_id, maintype, new RegisterMvp.Model.OnRequestListener() {
+        mRxManager.add(mModel.register(userName, password, province, city, area, identityId, fullName, phone, com_name, com_address, cer_num, comtype_id, maintype, new RegisterMvp.Model.OnRequestListener() {
             @Override
             public void onSucceed(Object o) {
                 mView.showSucceed();
@@ -68,11 +68,10 @@ public class RegisterPresenter extends RegisterMvp.Presenter {
 
             @Override
             public void onError(String msg) {
-                mView.showProgressError(null,msg);
+                mView.showProgressError(null, msg);
             }
-        });
+        }));
     }
-
 
 
     @Override

@@ -2,10 +2,12 @@ package com.qy.business.main.login.regist;
 
 import com.qy.business.main.base.BaseModel;
 import com.qy.business.main.base.BasePresenter;
-import com.qy.business.main.login.bean.Region_all;
 import com.qy.business.main.base.BaseProgressView;
+import com.qy.business.main.login.bean.Region_all;
 
 import java.util.List;
+
+import rx.Subscription;
 
 /**
  * Created by zhangyu on 2016/5/16.
@@ -23,12 +25,12 @@ public interface RegisterMvp {
          *
          * @param listener
          */
-        void getRegion(String cid, OnRequestListener listener);
+        Subscription getRegion(String cid, OnRequestListener listener);
 
         /**
          * 注册
          */
-        void register(String userName, String password, String province, String city, String area, String identityId, String fullName, String phone, String com_name
+        Subscription register(String userName, String password, String province, String city, String area, String identityId, String fullName, String phone, String com_name
                 , String com_address, String cer_num, String comtype_id, String maintype, OnRequestListener listener);
     }
 

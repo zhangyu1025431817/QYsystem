@@ -5,10 +5,7 @@ import com.qy.business.main.login.bean.ISBindBean;
 import com.qy.business.main.login.bean.LoginReturnBean;
 import com.qy.business.main.login.bean.NewShopBean;
 import com.qy.business.main.login.bean.RegionListBean;
-import com.qy.business.main.login.bean.Region_all;
 import com.qy.business.main.login.bean.RegisterGetBackBean;
-
-import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -34,26 +31,11 @@ public class NetWorkRequest {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static void getRegion(String cid, final Subscriber<List<Region_all>> subscriber) {
-        Network.getApiService().getRegion(cid)
-                .map(new Func1<RegionListBean, List<Region_all>>() {
-                    @Override
-                    public List<Region_all> call(RegionListBean bean) {
-                        if (bean == null) {
-                            subscriber.onError(new Throwable(SERVICE_RESPONSE_ERROR));
-                            return null;
-                        }
-                        if (bean.getStatus() == 1) {
-                            return bean.getData();
-                        } else {
-                            subscriber.onError(new Throwable(bean.getMsg()));
-                            return null;
-                        }
-                    }
-                })
+    public static Observable<RegionListBean> getRegion(String cid) {
+       return Network.getApiService().getRegion(cid)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .observeOn(AndroidSchedulers.mainThread());
+
     }
 
     public static void getMessageCode(final String userName, final String password, String safePassword, final String phone, final Subscriber<ISBindBean> subscriber) {
@@ -81,13 +63,11 @@ public class NetWorkRequest {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-    public static void register(String userName, String password, String province, String city, String area, String identityId, String fullName,
-                                String phone, String com_name, String com_address, String cer_num, String comtype_id, String maintype,
-                                Subscriber<RegisterGetBackBean> subscriber){
-        Network.getApiService().register(userName,password,province,city,area,identityId,fullName,phone,com_name,com_address,cer_num,comtype_id,maintype)
+    public static Observable<RegisterGetBackBean> register(String userName, String password, String province, String city, String area, String identityId, String fullName,
+                                                           String phone, String com_name, String com_address, String cer_num, String comtype_id, String maintype){
+        return Network.getApiService().register(userName,password,province,city,area,identityId,fullName,phone,com_name,com_address,cer_num,comtype_id,maintype)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
 }
