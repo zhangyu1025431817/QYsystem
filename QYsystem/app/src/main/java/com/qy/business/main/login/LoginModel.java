@@ -102,6 +102,9 @@ public class LoginModel implements LoginContract.Model {
 //                }
 //            }
 //        });
+        /**
+         * 因为base URL 不一样，后台代码又不能该，为了不影响整体架构就单独写了一个请求
+         */
         String url = Constant.URL + "/business/newsupplier.html";
         OkHttpUtils
                 .get()

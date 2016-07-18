@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.qy.business.activity.R;
@@ -15,6 +16,7 @@ import com.qy.business.tools.SPUtils;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 
@@ -24,6 +26,7 @@ import rx.functions.Func1;
 
 public class LoadingActivity extends AppCompatActivity {
     private static final String SHORT_KEY = "isAdd";
+    private Subscription mSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class LoadingActivity extends AppCompatActivity {
          * 延迟两秒页面跳转
          * 使用了RxAndroid
          */
-        Observable.timer(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread()).map(new Func1<Long, Object>() {
+        mSubscription = Observable.timer(4, TimeUnit.SECONDS, AndroidSchedulers.mainThread()).map(new Func1<Long, Object>() {
             @Override
             public Object call(Long aLong) {
                 //跳转到登陆界面
@@ -57,7 +60,16 @@ public class LoadingActivity extends AppCompatActivity {
         }).subscribe();
     }
 
-
+    @Override
+    public boolean onTouchEvent(MotionEvent ev){
+        //用户触摸跳过
+        if(ev.getAction() == MotionEvent.ACTION_UP){
+            mSubscription.unsubscribe();
+            startActivity(new Intent(LoadingActivity.this, LoginActivity.class));
+            finish();
+        }
+        return super.onTouchEvent(ev);
+    }
 
     private void addShortcut() {
         Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");

@@ -86,6 +86,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
          * 请求新进驻供应商
          */
         mPresenter.showNewShop();
+
     }
 
     @Override
@@ -130,15 +131,19 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
 
     @Override
     public void showNewShop(List<NewShopInfo> list) {
-        List<View> views = new ArrayList<>();
-        for (NewShopInfo info : list) {
-            View v = LayoutInflater.from(mContext).inflate(R.layout.item_new_shop, null);
-            ImageView iv = (ImageView) v.findViewById(R.id.iv_icon);
-            TextView tv = (TextView) v.findViewById(R.id.tv_name);
-            Glide.with(mContext).load(info.getShoplogo()).placeholder(R.drawable.default_bg)
-                    .centerCrop().into(iv);
-            tv.setText(info.getShop_name());
-            views.add(v);
+        try {
+            List<View> views = new ArrayList<>();
+            for (NewShopInfo info : list) {
+                View v = LayoutInflater.from(mContext).inflate(R.layout.item_new_shop, null);
+                ImageView iv = (ImageView) v.findViewById(R.id.iv_icon);
+                TextView tv = (TextView) v.findViewById(R.id.tv_name);
+                Glide.with(mContext).load(info.getShoplogo()).placeholder(R.drawable.default_bg)
+                        .centerCrop().into(iv);
+                tv.setText(info.getShop_name());
+                views.add(v);
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
         }
     }
 
