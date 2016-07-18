@@ -3,7 +3,7 @@ package com.qy.business.view;
 import android.content.Context;
 import android.os.CountDownTimer;
 
-import com.qy.business.activity.R;
+import com.qy.business.R;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 

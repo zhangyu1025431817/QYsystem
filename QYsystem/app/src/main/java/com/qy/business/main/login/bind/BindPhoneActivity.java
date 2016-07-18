@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.qy.business.activity.R;
+import com.qy.business.R;
 import com.qy.business.main.base.BaseActivity;
 import com.qy.business.tools.StringUtils;
 import com.qy.business.tools.T;

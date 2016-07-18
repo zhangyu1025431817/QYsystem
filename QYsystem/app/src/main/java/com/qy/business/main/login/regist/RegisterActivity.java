@@ -8,7 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.qy.business.activity.R;
+import com.qy.business.R;
 import com.qy.business.main.base.BaseActivity;
 import com.qy.business.main.login.bean.Region_all;
 import com.qy.business.tools.StringUtils;

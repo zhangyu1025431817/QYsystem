@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.qy.business.activity.R;
+import com.qy.business.R;
 import com.qy.business.main.login.LoginActivity;
 import com.qy.business.tools.AppUtils;
 import com.qy.business.tools.SPUtils;

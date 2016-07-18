@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.qy.business.activity.R;
+import com.qy.business.R;
 
 /**
  * Created by Cuneyt on 4.10.2015.

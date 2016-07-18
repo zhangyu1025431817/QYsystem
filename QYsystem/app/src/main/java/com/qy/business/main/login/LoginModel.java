@@ -3,7 +3,7 @@ package com.qy.business.main.login;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.qy.business.activity.R;
+import com.qy.business.R;
 import com.qy.business.config.Constant;
 import com.qy.business.main.MyApplication;
 import com.qy.business.main.login.bean.LoginReturnBean;

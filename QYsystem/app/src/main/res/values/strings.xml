@@ -34,4 +34,10 @@
     <string name="please_check_net">请检查网络！</string>
     <string name="json_error">数据解析异常！</string>
     <string name="user_name">用 户 名:</string>
+
+
+    <string name="home_system">营业系统</string>
+    <string name="sell_system">销售系统</string>
+    <string name="purchase_system">采购系统</string>
+    <string name="qy_service">奇易服务</string>
 </resources>

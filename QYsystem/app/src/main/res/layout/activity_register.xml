@@ -263,7 +263,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:button="@drawable/checkbg_register"
+                android:button="@drawable/cb_register"
                 android:paddingLeft="5dp"
                 android:text="供应商"
                 android:textColor="@color/title_text"
@@ -274,7 +274,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:button="@drawable/checkbg_register"
+                android:button="@drawable/cb_register"
                 android:paddingLeft="5dp"
                 android:text="零售商"
                 android:textColor="@color/title_text"
@@ -478,7 +478,7 @@
                 android:id="@+id/cb_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/checkbox_gwc_bg"
+                android:button="@drawable/cb_gwc_bg"
                 android:checked="true" />
 
             <TextView

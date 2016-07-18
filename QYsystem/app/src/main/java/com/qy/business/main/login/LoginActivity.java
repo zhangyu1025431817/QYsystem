@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.qy.business.activity.R;
+import com.qy.business.R;
 import com.qy.business.main.base.BaseActivity;
 import com.qy.business.main.login.bean.NewShopInfo;
 import com.qy.business.main.login.bind.BindPhoneActivity;

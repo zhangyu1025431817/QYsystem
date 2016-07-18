@@ -1,33 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/main_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-    </android.support.design.widget.AppBarLayout>
+    <include
+        android:id="@+id/ll_title"
+        layout="@layout/view_toolbar" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:layout_above="@+id/rg_nav_bottom"
+        android:layout_below="@id/ll_title"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <RadioGroup
+        android:id="@+id/rg_nav_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f6f9ff"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
-</android.support.design.widget.CoordinatorLayout>
+        <RadioButton
+            android:id="@+id/rb_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/cb_home_icon"
+            android:gravity="center"
+            android:padding="10px"
+            android:text="@string/home_system"
+            android:textSize="20px" />
+
+        <RadioButton
+            android:id="@+id/rb_sell"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/cb_sell_icon"
+            android:gravity="center"
+            android:padding="10px"
+            android:text="@string/sell_system"
+            android:textSize="20px" />
+
+        <RadioButton
+            android:id="@+id/rb_purchase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/cb_purchase_icon"
+            android:gravity="center"
+            android:padding="10px"
+            android:text="@string/purchase_system"
+            android:textSize="20px" />
+
+        <RadioButton
+            android:id="@+id/rb_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/cb_service_icon"
+            android:gravity="center"
+            android:padding="10px"
+            android:text="@string/qy_service"
+            android:textSize="20px" />
+    </RadioGroup>
+
+</com.zhy.autolayout.AutoRelativeLayout>
