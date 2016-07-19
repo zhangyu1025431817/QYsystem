@@ -36,5 +36,7 @@
         <item name="android:paddingLeft">5dip</item>
         <item name="android:layout_height">35dp</item>
     </style>
-
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">20px</item>
+    </style>
 </resources>

@@ -20,12 +20,14 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
+        android:background="#f6f9ff"
         android:layout_alignParentBottom="true"
-        android:layout_height="100px"
+        android:layout_height="120px"
         app:tabGravity="fill"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="#FF4081"
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+        app:tabSelectedTextColor="@color/black"
         app:tabTextColor="@color/black">
     </android.support.design.widget.TabLayout>
 

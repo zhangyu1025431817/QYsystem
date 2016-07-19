@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,16 +36,11 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
     NavigationView nvMainNavigation;
     @Bind(R.id.dl_main_drawer)
     DrawerLayout dlMainDrawer;
-    //    @Bind( R.id.rg_nav_bottom)
-//    RadioGroup radioGroup;
     @Bind(R.id.tabLayout)
     TabLayout mTabLayout;
-    TabLayout.Tab mTOne, mTTwo, mTThree, mTFour;
     ImageView im_face;
     TextView tv_name;
     private int[] mTitles = new int[]{R.string.home_system, R.string.sell_system, R.string.purchase_system, R.string.qy_service};
-    private int[] mNormalDrawables = new int[]{R.drawable.icon_home_n, R.drawable.icon_sell_n, R.drawable.icon_purchase_n, R.drawable.icon_service_n};
-    private int[] mSelectDrawables = new int[]{R.drawable.icon_home_p, R.drawable.icon_sell_p, R.drawable.icon_purchase_p, R.drawable.icon_service_p};
 
     @Override
     public int getLayoutId() {
@@ -106,46 +100,25 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
 
         });
         mTabLayout.setupWithViewPager(mViewpager);
-        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                mViewpager.setCurrentItem((Integer) tab.getTag());
-                TextView tv = (TextView) tab.getCustomView();
-                Drawable drawable = getResources().getDrawable(mSelectDrawables[(int) tab.getTag()]);
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                tv.setCompoundDrawables(null, drawable, null, null);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                TextView tv = (TextView) tab.getCustomView();
-                Drawable drawable = getResources().getDrawable(mNormalDrawables[(int) tab.getTag()]);
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                tv.setCompoundDrawables(null, drawable, null, null);
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
         for (int i = 0; i < mTabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = mTabLayout.getTabAt(i);
-            if (tab != null) {
-                tab.setCustomView(getTabView(i));
-                tab.setTag(i);
+            Drawable d = null;
+            switch (i) {
+                case 0:
+                    d = getResources().getDrawable(R.drawable.cb_home_icon);
+                    break;
+                case 1:
+                    d = getResources().getDrawable(R.drawable.cb_sell_icon);
+                    break;
+                case 2:
+                    d = getResources().getDrawable(R.drawable.cb_purchase_icon);
+                    break;
+                case 3:
+                    d = getResources().getDrawable(R.drawable.cb_service_icon);
+                    break;
             }
+            tab.setIcon(d);
         }
-    }
-
-    private View getTabView(int position) {
-        View v = LayoutInflater.from(this).inflate(R.layout.tab_main_bottom, null);
-        TextView rb = (TextView) v.findViewById(R.id.rb);
-        rb.setText(mTitles[position]);
-        Drawable drawable = getResources().getDrawable(mNormalDrawables[position]);
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        rb.setCompoundDrawables(null, drawable, null, null);
-        return rb;
     }
 
     @Override
