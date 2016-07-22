@@ -10,6 +10,7 @@
     <color name="btn_bg_normal">#1daef0</color>
     <color name="btn_bg_press">#FF1BA2DF</color>
     <color name="bg_regist_item">#f3f3f4</color>
+    <color name="icon_system_press">#f0f0f0</color>
 
     <color name="white">#ffffff</color><!-- 白色 -->
 

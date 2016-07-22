@@ -28,6 +28,7 @@
             android:layout_height="80px"
             android:textColor="@color/white"
             android:hint="@string/enter_user_name"
+            android:text="一二三"
             android:textSize="26px"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
@@ -46,6 +47,7 @@
             android:textSize="26px"
             android:textColor="@color/white"
             android:hint="@string/enter_password"
+            android:text="123456"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 

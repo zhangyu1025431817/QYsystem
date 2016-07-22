@@ -26,7 +26,7 @@ import com.qy.business.main.service.ServiceFragment;
 import butterknife.Bind;
 
 public class MainActivity extends BaseActivity<MainPresenter, MainModel> implements MainContract.View {
-    @Bind(R.id.ll_title)
+    @Bind(R.id.id_tool_bar)
     Toolbar toolbar;
     @Bind(R.id.toolbar_title)
     TextView title;
@@ -51,7 +51,6 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
     public void initView() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.icon_user);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         title.setText(mTitles[0]);
 
@@ -59,6 +58,8 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
 
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, dlMainDrawer, R.string.drawer_open, R.string.drawer_closed);
         mDrawerToggle.syncState();
+        //必须放在mDrawerToggle.syncState()后面
+        toolbar.setNavigationIcon(R.drawable.icon_user);
         dlMainDrawer.addDrawerListener(mDrawerToggle);
 
         View headerView = nvMainNavigation.inflateHeaderView(R.layout.nav_header_main);

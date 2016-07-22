@@ -77,6 +77,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
     public void initView() {
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.icon_return);
         mDialogDelegate = new SweetAlertDialogDelegate(this);
         initManageType();
         loadProvinceInfo();

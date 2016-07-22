@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.qy.business"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -47,4 +47,8 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.4'
     //java注解
     compile 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.jude:easyrecyclerview:4.0.4'
+    compile 'com.jude:rollviewpager:1.2.9'
+    compile project(':banner')
+    compile project(':recyclerview')
 }

@@ -166,7 +166,7 @@ public class SweetAlertDialogDelegate implements DialogDelegate {
     @Override
     public void clearDialog() {
         if(pDialog != null){
-            pDialog.dismissWithAnimation();
+            pDialog.dismiss();
         }
     }
 }
