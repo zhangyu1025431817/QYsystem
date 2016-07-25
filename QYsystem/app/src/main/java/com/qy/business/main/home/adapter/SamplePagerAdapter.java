@@ -1,4 +1,4 @@
-package com.qy.business.main.home;
+package com.qy.business.main.home.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;

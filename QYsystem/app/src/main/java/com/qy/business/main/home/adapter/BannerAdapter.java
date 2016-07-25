@@ -1,4 +1,4 @@
-package com.qy.business.main.home;
+package com.qy.business.main.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +18,9 @@ public class BannerAdapter extends StaticPagerAdapter {
 
     private Context ctx;
     private List<Ad> list;
-       public BannerAdapter(Context ctx){
+       public BannerAdapter(Context ctx ,List<Ad> list){
            this.ctx = ctx;
-            list = DataProvider.getAdList();
+           this.list = list;
         }
 
         @Override
@@ -47,4 +47,5 @@ public class BannerAdapter extends StaticPagerAdapter {
         public int getCount() {
             return list.size();
         }
+
     }
