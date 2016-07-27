@@ -1,89 +1,59 @@
 package com.qy.business.main.purchase;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.Gravity;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.qy.business.R;
+import com.qy.business.bean.IconBean;
+import com.qy.business.common.DividerGridItemDecoration;
+import com.qy.business.common.IconAdapter;
+import com.qy.business.main.base.BaseFragment;
+
+import java.util.List;
+
+import butterknife.Bind;
 
 /**
  * Created by zhangyu on 2016/7/18.
  */
-public class PurchaseFragment extends Fragment {
-    public static final String TAG = "PurchaseFragment";
+public class PurchaseFragment extends BaseFragment<PurchasePresenter, PurchaseModel> implements PurchaseContract.View {
+    @Bind(R.id.recyclerView)
+    EasyRecyclerView recyclerView;
+    protected IconAdapter mIconAdapter;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView");
-        TextView tv =new TextView(getActivity());
-        tv.setText("PurchaseFragment");
-        tv.setGravity(Gravity.CENTER);
-        return tv;
+    public View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_home_system, null);
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        Log.d(TAG, "onAttach");
+    public void init() {
+        if (isPrepared && isVisible) {
+
+
+            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
+            recyclerView.setAdapter(mIconAdapter = new IconAdapter(getActivity()));
+            DividerGridItemDecoration dividerGridItemDecoration = new DividerGridItemDecoration(getActivity());
+            recyclerView.setVerticalScrollBarEnabled(false);
+            recyclerView.addItemDecoration(dividerGridItemDecoration);
+            mIconAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+
+                }
+            });
+            mPresenter.getFunctionIcons();
+        }
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate");
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG, "onDetach");
+    public void showFunctionList(List<IconBean> list) {
+        mIconAdapter.addAll(list);
     }
 }

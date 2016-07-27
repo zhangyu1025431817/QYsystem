@@ -1,11 +1,8 @@
 package com.qy.business.main.home;
 
-import android.content.res.TypedArray;
-
-import com.qy.business.R;
-import com.qy.business.main.MyApplication;
-import com.qy.business.main.home.bean.Ad;
-import com.qy.business.main.home.bean.IconBean;
+import com.qy.business.bean.Ad;
+import com.qy.business.bean.IconBean;
+import com.qy.business.local.DataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by zhangyu on 2016/7/25.
  */
-public class HomeModel implements HomeMvp.Model {
+public class HomeModel implements HomeContract.Model {
     @Override
     public Observable<List<Ad>> getAd() {
         return Observable.create(new Observable.OnSubscribe<List<Ad>>() {
@@ -32,26 +29,7 @@ public class HomeModel implements HomeMvp.Model {
 
     @Override
     public Observable<List<IconBean>> getFunctionIcons() {
-        return Observable.create(new Observable.OnSubscribe<List<IconBean>>() {
-            @Override
-            public void call(Subscriber<? super List<IconBean>> subscriber) {
-                TypedArray iconArray = MyApplication.getContext().getResources().obtainTypedArray(R.array.system_icon);
-                String[] iconName = MyApplication.getContext().getResources().getStringArray(R.array.system_icon_name);
-
-                List<IconBean> list = new ArrayList<>();
-                int len = iconArray.length();
-                for (int i = 0; i < len; i++) {
-                    IconBean bean = new IconBean();
-                    bean.setResId(iconArray.getResourceId(i, 0));
-                    bean.setName(iconName[i]);
-                    list.add(bean);
-                }
-                iconArray.recycle();
-                subscriber.onNext(list);
-                subscriber.onCompleted();
-            }
-        }).subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread());
+        return DataProvider.getFunctionIcons(DataProvider.SYSTEM_HOME);
     }
     public static List<Ad> getAdList(){
         ArrayList<Ad> arr = new ArrayList<>();

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.qy.business.R;
-import com.qy.business.main.home.bean.Ad;
+import com.qy.business.bean.Ad;
 
 import java.util.List;
 

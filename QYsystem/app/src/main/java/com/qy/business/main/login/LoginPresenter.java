@@ -5,7 +5,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 import com.qy.business.main.MyApplication;
-import com.qy.business.main.login.bean.NewShopInfo;
+import com.qy.business.bean.NewShopInfo;
 
 import java.util.List;
 

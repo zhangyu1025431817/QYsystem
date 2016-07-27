@@ -2,7 +2,7 @@ package com.qy.business.main.login;
 
 import com.qy.business.main.base.BaseModel;
 import com.qy.business.main.base.BasePresenter;
-import com.qy.business.main.login.bean.NewShopInfo;
+import com.qy.business.bean.NewShopInfo;
 import com.qy.business.main.base.BaseProgressView;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.qy.business.main.login.regist;
 
-import com.qy.business.main.login.bean.RegionListBean;
-import com.qy.business.main.login.bean.RegisterGetBackBean;
+import com.qy.business.bean.RegionListBean;
+import com.qy.business.bean.RegisterGetBackBean;
 import com.qy.business.network.MySubscriber;
 import com.qy.business.network.NetWorkRequest;
 import com.qy.business.tools.AESHelper;

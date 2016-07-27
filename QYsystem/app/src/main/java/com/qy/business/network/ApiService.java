@@ -1,11 +1,11 @@
 package com.qy.business.network;
 
-import com.qy.business.main.login.bean.CommonBean;
-import com.qy.business.main.login.bean.ISBindBean;
-import com.qy.business.main.login.bean.LoginReturnBean;
-import com.qy.business.main.login.bean.NewShopBean;
-import com.qy.business.main.login.bean.RegionListBean;
-import com.qy.business.main.login.bean.RegisterGetBackBean;
+import com.qy.business.bean.CommonBean;
+import com.qy.business.bean.ISBindBean;
+import com.qy.business.bean.LoginReturnBean;
+import com.qy.business.bean.NewShopBean;
+import com.qy.business.bean.RegionListBean;
+import com.qy.business.bean.RegisterGetBackBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;

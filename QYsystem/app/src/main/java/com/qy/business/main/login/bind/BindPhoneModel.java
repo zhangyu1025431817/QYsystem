@@ -3,7 +3,7 @@ package com.qy.business.main.login.bind;
 import android.content.Context;
 
 import com.qy.business.main.MyApplication;
-import com.qy.business.main.login.bean.ISBindBean;
+import com.qy.business.bean.ISBindBean;
 import com.qy.business.network.MySubscriber;
 import com.qy.business.network.NetWorkRequest;
 import com.qy.business.tools.AESHelper;

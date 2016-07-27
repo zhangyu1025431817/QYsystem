@@ -1,6 +1,7 @@
 package com.qy.business.main.main;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -51,7 +52,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
     public void initView() {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         title.setText(mTitles[0]);
 
         initViewPager();
@@ -122,20 +123,37 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
             Drawable d = null;
             switch (i) {
                 case 0:
-                    d = getResources().getDrawable(R.drawable.cb_home_icon);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        d = getResources().getDrawable(R.drawable.cb_home_icon, null);
+                    } else {
+                        d = getResources().getDrawable(R.drawable.cb_home_icon);
+                    }
                     break;
                 case 1:
-                    d = getResources().getDrawable(R.drawable.cb_sell_icon);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        d = getResources().getDrawable(R.drawable.cb_sell_icon, null);
+                    } else {
+                        d = getResources().getDrawable(R.drawable.cb_sell_icon);
+                    }
                     break;
                 case 2:
-                    d = getResources().getDrawable(R.drawable.cb_purchase_icon);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        d = getResources().getDrawable(R.drawable.cb_purchase_icon, null);
+                    } else {
+                        d = getResources().getDrawable(R.drawable.cb_purchase_icon);
+                    }
                     break;
                 case 3:
-                    d = getResources().getDrawable(R.drawable.cb_service_icon);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        d = getResources().getDrawable(R.drawable.cb_service_icon, null);
+                    } else {
+                        d = getResources().getDrawable(R.drawable.cb_service_icon);
+                    }
                     break;
             }
             tab.setIcon(d);
         }
+
     }
 
     @Override

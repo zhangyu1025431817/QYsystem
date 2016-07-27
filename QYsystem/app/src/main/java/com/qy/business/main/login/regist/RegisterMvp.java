@@ -3,7 +3,7 @@ package com.qy.business.main.login.regist;
 import com.qy.business.main.base.BaseModel;
 import com.qy.business.main.base.BasePresenter;
 import com.qy.business.main.base.BaseProgressView;
-import com.qy.business.main.login.bean.Region_all;
+import com.qy.business.bean.Region_all;
 
 import java.util.List;
 

@@ -5,8 +5,8 @@
     <version value="1" ></version>
 
     <list>
-        <mapping class="com.qy.business.main.login.bean.Province"></mapping>
-        <mapping class="com.qy.business.main.login.bean.City"></mapping>
-        <mapping class="com.qy.business.main.login.bean.Area"></mapping>
+        <mapping class="com.qy.business.bean.Province"></mapping>
+        <mapping class="com.qy.business.bean.City"></mapping>
+        <mapping class="com.qy.business.bean.Area"></mapping>
     </list>
 </litepal>

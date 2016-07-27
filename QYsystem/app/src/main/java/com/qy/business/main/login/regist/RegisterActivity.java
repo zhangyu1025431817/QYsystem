@@ -10,7 +10,7 @@ import android.widget.Spinner;
 
 import com.qy.business.R;
 import com.qy.business.main.base.BaseActivity;
-import com.qy.business.main.login.bean.Region_all;
+import com.qy.business.bean.Region_all;
 import com.qy.business.tools.StringUtils;
 import com.qy.business.tools.T;
 import com.qy.business.view.DialogDelegate;
@@ -61,7 +61,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
     CheckBox mCbSale;
     @Bind(R.id.id_tool_bar)
     Toolbar mToolbar;
-    private String[] mManageTypeNames;
     private String[] mManageTypeIds;
     String[] mProvinceNames, mCityNames, mAreaNames;
     String[] mProvinceIds, mCityIds, mAreaIds;
@@ -106,7 +105,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
     }
 
     private void initManageType() {
-        mManageTypeNames = getResources().getStringArray(R.array.maintype_name);
+        String[] mManageTypeNames = getResources().getStringArray(R.array.maintype_name);
         mManageTypeIds = getResources().getStringArray(R.array.maintype_id);
 
         ArrayAdapter adapter = new ArrayAdapter<CharSequence>(RegisterActivity.this, R.layout.item_spinner, mManageTypeNames);
@@ -235,7 +234,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
             T.showShort(this, "请输入有效的身份证号码!");
             return;
         }
-        String phoneNumber = mEtPhone.getText().toString().toString();
+        String phoneNumber = mEtPhone.getText().toString().trim();
         if (!StringUtils.checkPhone(phoneNumber)) {
             T.showShort(this, "请输入有效的手机号码!");
             return;
@@ -245,7 +244,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
             T.showShort(this, "请输入有效的联系地址!");
             return;
         }
-        String type = "";
+        String type = "1";
         if (mCbSupply.isChecked() && mCbSale.isChecked()) {
             type = "3";
         } else if (mCbSupply.isChecked() && !mCbSale.isChecked()) {

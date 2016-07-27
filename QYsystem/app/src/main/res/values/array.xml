@@ -29,6 +29,30 @@
         <item>农家乐</item>
         <item>货运服务</item>
     </string-array>
+    <string-array name="bank_icon">
+        <item>@drawable/icon_bank_gongshang</item>
+        <item>@drawable/icon_bank_nongye</item>
+        <item>@drawable/icon_bank_china</item>
+        <item>@drawable/icon_bank_jianshe</item>
+        <item>@drawable/icon_bank_nongcunshangye</item>
+        <item>@drawable/icon_bank_chongqing</item>
+        <item>@drawable/icon_bank_zhaoshang</item>
+        <item>@drawable/icon_bank_youzheng</item>
+        <item>@drawable/icon_bank_jiaotong</item>
+        <item>@drawable/icon_bank_alipay</item>
+    </string-array>
+    <string-array name="bank_icon_name">
+        <item>中国工商银行</item>
+        <item>农业银行</item>
+        <item>中国银行</item>
+        <item>建设银行</item>
+        <item>农村商业银行</item>
+        <item>重庆银行</item>
+        <item>招商银行</item>
+        <item>邮政储蓄</item>
+        <item>交通银行</item>
+        <item>支付宝</item>
+    </string-array>
     <string-array name="system_icon">
         <item>@drawable/icon_fix_phone</item>
         <item>@drawable/icon_phone_recharge</item>
@@ -54,6 +78,31 @@
         <item>@drawable/icon_caifutong</item>
         <item>@drawable/icon_credit_card</item>
         <item>@drawable/icon_sell_order</item>
+    </string-array>
+    <string-array name="purchase_icon">
+        <item>@drawable/icon_purchase_goods</item>
+        <item>@drawable/icon_purchase_order</item>
+        <item>@drawable/icon_supplier_manage</item>
+        <item>@drawable/icon_shopping_cart</item>
+    </string-array>
+    <string-array name="sell_icon">
+        <item>@drawable/icon_goods_manage</item>
+        <item>@drawable/icon_deal_order</item>
+        <item>@drawable/icon_already_deal_order</item>
+        <item>@drawable/icon_clint_relationship</item>
+    </string-array>
+
+    <string-array name="sell_icon_name">
+        <item>商品管理</item>
+        <item>处理订单</item>
+        <item>已处理订单</item>
+        <item>客户联系</item>
+    </string-array>
+    <string-array name="purchase_icon_name">
+        <item>产品采购</item>
+        <item>采购单管理</item>
+        <item>供应商联系</item>
+        <item>购物车</item>
     </string-array>
     <string-array name="system_icon_name">
         <item>固话宽带缴费</item>
