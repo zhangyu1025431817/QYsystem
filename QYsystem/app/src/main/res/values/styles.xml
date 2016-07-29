@@ -17,7 +17,6 @@
         <item name="colorControlHighlight">@color/colorWhite</item>
     </style>
 
-
     //For GifView Declaration
 
     <style name="Widget.GifView" parent="@android:style/Widget"></style>
