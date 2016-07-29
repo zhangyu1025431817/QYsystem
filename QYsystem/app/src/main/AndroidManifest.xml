@@ -50,6 +50,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.qy.business.main.login.regist.RegisterActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".main.purchase.product.ProductPurchaseActivity"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="design_width"
             android:value="720"/>

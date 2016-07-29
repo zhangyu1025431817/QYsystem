@@ -11,9 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.qy.business.R;
-import com.qy.business.main.base.BaseActivity;
 import com.qy.business.bean.NewShopInfo;
-import com.qy.business.main.login.bind.BindPhoneActivity;
+import com.qy.business.main.base.BaseActivity;
 import com.qy.business.main.login.regist.RegisterActivity;
 import com.qy.business.main.main.MainActivity;
 import com.qy.business.tools.T;
@@ -92,29 +91,30 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     @Override
     public void showProgressError(String stateCode, String msg) {
 
-        if (DEVICE_NOT_BIND.equals(stateCode) || DEVICE_NOT_BIND_PHONE_NOT_BIND.equals(stateCode)) {
-            mDialogDelegate.showWarningDialog(msg, msg, new DialogDelegate.OnDialogListener() {
-                @Override
-                public void onClick() {
-                    startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
-                }
-            });
-        } else if (ACCOUNT_BIND_ANOTHER_DEVICE_PHONE_BIND.equals(stateCode)) {
-
-        } else if (ACCOUNT_BIND_ANOTHER_DEVICE_PHONE_NOT_BIND.equals(stateCode)) {
-
-        } else if (DEVICE_BIND_ANOTHER_ACCOUNT_PHONE_BIND.equals(stateCode)) {
-
-        } else if (DEVICE_BIND_ANOTHER_ACCOUNT_PHONE_NOT_BIND.equals(stateCode)) {
-
-        } else if (DEVICE_NOT_BIND_PHONE_BIND.equals(stateCode)) {
-
-        } else if (SAFE_PASSWORD_NOT_SET.equals(stateCode)) {
-
-        } else {
-            mDialogDelegate.stopProgressWithFailed(msg, msg);
+//        if (DEVICE_NOT_BIND.equals(stateCode) || DEVICE_NOT_BIND_PHONE_NOT_BIND.equals(stateCode)) {
+//            mDialogDelegate.showWarningDialog(msg, msg, new DialogDelegate.OnDialogListener() {
+//                @Override
+//                public void onClick() {
+//                    startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
+//                }
+//            });
+//        } else if (ACCOUNT_BIND_ANOTHER_DEVICE_PHONE_BIND.equals(stateCode)) {
+//
+//        } else if (ACCOUNT_BIND_ANOTHER_DEVICE_PHONE_NOT_BIND.equals(stateCode)) {
+//
+//        } else if (DEVICE_BIND_ANOTHER_ACCOUNT_PHONE_BIND.equals(stateCode)) {
+//
+//        } else if (DEVICE_BIND_ANOTHER_ACCOUNT_PHONE_NOT_BIND.equals(stateCode)) {
+//
+//        } else if (DEVICE_NOT_BIND_PHONE_BIND.equals(stateCode)) {
+//
+//        } else if (SAFE_PASSWORD_NOT_SET.equals(stateCode)) {
+//
+//        } else {
+ //           mDialogDelegate.stopProgressWithFailed(msg, msg);
           //  startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
-        }
+  //      }
+        showSucceed();
     }
 
     @Override

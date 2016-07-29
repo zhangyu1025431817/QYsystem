@@ -1,5 +1,6 @@
 package com.qy.business.main.purchase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -14,6 +15,7 @@ import com.qy.business.bean.IconBean;
 import com.qy.business.common.DividerGridItemDecoration;
 import com.qy.business.common.IconAdapter;
 import com.qy.business.main.base.BaseFragment;
+import com.qy.business.main.purchase.product.ProductPurchaseActivity;
 
 import java.util.List;
 
@@ -34,7 +36,6 @@ public class PurchaseFragment extends BaseFragment<PurchasePresenter, PurchaseMo
 
     @Override
     public void init() {
-        if (isPrepared && isVisible) {
 
 
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
@@ -45,11 +46,14 @@ public class PurchaseFragment extends BaseFragment<PurchasePresenter, PurchaseMo
             mIconAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-
+                    switch (position){
+                        case 0:
+                            startActivity(new Intent(getActivity(), ProductPurchaseActivity.class));
+                            break;
+                    }
                 }
             });
             mPresenter.getFunctionIcons();
-        }
     }
 
     @Override

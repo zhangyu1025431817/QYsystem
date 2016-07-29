@@ -16,6 +16,7 @@
             android:id="@+id/rb_remit_add_money"
             android:layout_width="234px"
             android:layout_height="60px"
+            android:checked="true"
             android:background="@drawable/rb_qy_service_selector"
             android:button="@null"
             android:gravity="center"
@@ -37,6 +38,7 @@
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="540px"
         android:id="@+id/layout_right"
+        android:visibility="gone"
         android:layout_marginTop="120px"
         android:layout_below="@id/radio_group"
         android:orientation="vertical"
@@ -162,12 +164,12 @@
                 android:paddingLeft="30px"
                 android:paddingRight="30px"
                 android:textColor="#1daef0"
+                android:textSize="24px"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/layout_left"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/radio_group">
@@ -204,6 +206,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="24px"
+                android:textSize="24px"
                 android:text="加款记录" />
 
             <TextView
@@ -211,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="24px"
+                android:textSize="24px"
                 android:text="注意事项" />
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoRelativeLayout>

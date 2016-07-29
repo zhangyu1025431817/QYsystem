@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -100,6 +101,10 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
                 return getString(mTitles[position]);
             }
 
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                return super.instantiateItem(container, position);
+            }
         });
         mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -117,6 +122,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
 
             }
         });
+        mViewpager.setOffscreenPageLimit(4);
         mTabLayout.setupWithViewPager(mViewpager);
         for (int i = 0; i < mTabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = mTabLayout.getTabAt(i);

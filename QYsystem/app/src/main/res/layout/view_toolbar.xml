@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
+        android:minHeight="98px"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:singleLine="true"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="30px"
+            android:textColor="@color/white"/>
     </android.support.v7.widget.Toolbar>
 </com.zhy.autolayout.AutoLinearLayout>

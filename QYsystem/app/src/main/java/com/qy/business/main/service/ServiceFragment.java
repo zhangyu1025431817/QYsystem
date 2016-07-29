@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -20,6 +21,7 @@ import com.qy.business.main.service.adapter.ImageAdapter;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by zhangyu on 2016/7/18.
@@ -33,6 +35,10 @@ public class ServiceFragment extends BaseFragment<ServicePresenter, ServiceModel
     RadioGroup mRadioGroup;
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
+    @Bind(R.id.rb_remit_add_money)
+    RadioButton mRbRemitAddMoney;
+    @Bind(R.id.rb_add_money_online)
+    RadioButton mRbAddMoneyOnline;
     protected ImageAdapter mAdapter;
 
     @Override
@@ -40,39 +46,31 @@ public class ServiceFragment extends BaseFragment<ServicePresenter, ServiceModel
         return inflater.inflate(R.layout.fragment_qy_service, null);
     }
 
+    @OnClick(R.id.rb_remit_add_money)
+    void onLeftClick(View v){
+        showRemitAddMoney();
+    }
+    @OnClick(R.id.rb_add_money_online)
+    void onRightClick(View v){
+        showAddMoneyOnline();
+    }
     @Override
     public void init() {
-        if (isPrepared && isVisible) {
-            mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    switch (checkedId) {
-                        case R.id.rb_remit_add_money:
-                            showRemitAddMoney();
-                            break;
-                        case R.id.rb_add_money_online:
-                            showAddMoneyOnline();
-                            break;
-                    }
-                }
-            });
-            mRadioGroup.check(R.id.rb_remit_add_money);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setAdapter(mAdapter = new ImageAdapter(getActivity()));
+        SpaceDecoration decoration = new SpaceDecoration(2);
+        recyclerView.setVerticalScrollBarEnabled(false);
+        recyclerView.addItemDecoration(decoration);
+        mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
 
-        /*recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));*/
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-            recyclerView.setAdapter(mAdapter = new ImageAdapter(getActivity()));
-            SpaceDecoration decoration = new SpaceDecoration(2);
-            recyclerView.setVerticalScrollBarEnabled(false);
-            recyclerView.addItemDecoration(decoration);
-            mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(int position) {
-
-                }
-            });
-            mPresenter.getFunctionIcons();
-        }
+            }
+        });
+        mPresenter.getFunctionIcons();
     }
+
+
 
     /**
      * 汇款加款
@@ -81,7 +79,7 @@ public class ServiceFragment extends BaseFragment<ServicePresenter, ServiceModel
         mViewLeft.setVisibility(View.VISIBLE);
         mViewLeft.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.push_left_out));
         mViewRight.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.push_left_in));
-        mViewRight.setVisibility(View.GONE);
+        mViewRight.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -91,7 +89,7 @@ public class ServiceFragment extends BaseFragment<ServicePresenter, ServiceModel
         mViewRight.setVisibility(View.VISIBLE);
         mViewRight.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.push_left_out));
         mViewLeft.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.push_left_in));
-        mViewLeft.setVisibility(View.GONE);
+        mViewLeft.setVisibility(View.INVISIBLE);
 
     }
 

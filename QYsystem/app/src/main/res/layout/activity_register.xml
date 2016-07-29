@@ -28,7 +28,7 @@
 
 
         <!-- 用户名 -->
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
@@ -59,15 +59,15 @@
                 android:singleLine="true"
                 android:textSize="@dimen/font_size_14" />
 
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
 
         <!-- 密码 -->
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="20px"
+            android:layout_height="@dimen/register_item_height"
+            android:layout_marginTop="10px"
             android:paddingLeft="80px"
             android:background="@color/bg_regist_item"
             android:gravity="center_vertical"
@@ -94,7 +94,7 @@
                 android:singleLine="true"
                 android:textSize="@dimen/font_size_14"/>
 
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
         <!-- 确认密码 -->
 
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:paddingLeft="80px"
             android:background="@color/bg_regist_item"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:layout_marginTop="20px"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -134,7 +134,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
             android:paddingRight="80px"
             android:background="@color/bg_regist_item"
@@ -181,7 +181,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
             android:layout_marginTop="20px"
             android:background="@color/bg_regist_item"
@@ -211,7 +211,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
             android:paddingRight="80px"
             android:background="@color/bg_regist_item"
@@ -242,7 +242,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
             android:paddingRight="80px"
             android:background="@color/bg_regist_item"
@@ -285,7 +285,7 @@
         <!-- 营业地址 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
             android:layout_marginTop="20px"
             android:background="@color/bg_regist_item"
@@ -315,7 +315,7 @@
         <!-- 执照号码 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
             android:background="@color/bg_regist_item"
             android:layout_marginTop="20px"
@@ -345,7 +345,7 @@
         <!-- 法人姓名  -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:layout_marginTop="20px"
             android:paddingLeft="80px"
             android:background="@color/bg_regist_item"
@@ -376,7 +376,7 @@
         <!-- 身份证 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
             android:background="@color/bg_regist_item"
             android:layout_marginTop="20px"
@@ -407,7 +407,7 @@
         <!-- 联系电话 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:layout_marginTop="20px"
             android:paddingLeft="80px"
             android:background="@color/bg_regist_item"
@@ -437,7 +437,7 @@
         <!-- 联系地址 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/register_item_height"
             android:paddingLeft="80px"
             android:layout_marginTop="20px"
             android:gravity="center_vertical"
@@ -476,8 +476,8 @@
 
             <CheckBox
                 android:id="@+id/cb_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20px"
+                android:layout_height="20px"
                 android:button="@drawable/cb_gwc_bg"
                 android:checked="true" />
 

@@ -56,7 +56,6 @@ public class HomeFragment extends BaseFragment<HomePresenter,HomeModel> implemen
 
     @Override
     public void init() {
-        if (isPrepared && isVisible){
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4,StaggeredGridLayoutManager.VERTICAL));
             recyclerView.setAdapter(mIconAdapter = new IconAdapter(getActivity()));
             DividerGridItemDecoration dividerGridItemDecoration = new DividerGridItemDecoration(getActivity());
@@ -89,5 +88,4 @@ public class HomeFragment extends BaseFragment<HomePresenter,HomeModel> implemen
             mPresenter.getFunctionIcons();
         }
 
-    }
 }

@@ -34,7 +34,6 @@ public class SellFragment extends BaseFragment<SellPresenter,SellModel> implemen
 
     @Override
     public void init() {
-        if (isPrepared && isVisible) {
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
             recyclerView.setAdapter(mIconAdapter = new IconAdapter(getActivity()));
             DividerGridItemDecoration dividerGridItemDecoration = new DividerGridItemDecoration(getActivity());
@@ -47,7 +46,6 @@ public class SellFragment extends BaseFragment<SellPresenter,SellModel> implemen
                 }
             });
             mPresenter.getFunctionIcons();
-        }
     }
 
     @Override

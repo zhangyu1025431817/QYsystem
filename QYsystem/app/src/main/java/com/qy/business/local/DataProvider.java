@@ -59,7 +59,7 @@ public class DataProvider {
                 iconArray.recycle();
 
             }
-        }).subscribeOn(Schedulers.newThread())
+        }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
     }

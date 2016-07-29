@@ -3,6 +3,7 @@ package com.qy.business.main.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,24 +21,27 @@ public abstract class BaseFragment<T extends BasePresenter,M extends BaseModel> 
     /** Fragment当前状态是否可见 */
     protected boolean isVisible;
     protected boolean isPrepared;
+    private boolean isFirst = true;
     public abstract View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
     public abstract void init();
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mPresenter = TUtil.getT(this,0);
-        mModel = TUtil.getT(this,1);
-        if (this instanceof BaseView) mPresenter.setVM(this, mModel);
-    }
+    private View rootView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = getContentView(inflater,container,savedInstanceState);
-        ButterKnife.bind(this,view);
+        mPresenter = TUtil.getT(this,0);
+        mModel = TUtil.getT(this,1);
+        if (this instanceof BaseView) mPresenter.setVM(this, mModel);
+        rootView = getContentView(inflater,container,savedInstanceState);
+        ButterKnife.bind(this,rootView);
+        return rootView;
+    }
+
+        @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         isPrepared = true;
-        init();
-        return view;
+        lazyLoad();
     }
 
 
@@ -51,41 +55,30 @@ public abstract class BaseFragment<T extends BasePresenter,M extends BaseModel> 
 
         if(getUserVisibleHint()) {
             isVisible = true;
-            onVisible();
+            lazyLoad();
         } else {
             isVisible = false;
-            onInvisible();
         }
     }
-    /**
-     * 可见
-     */
-    protected void onVisible() {
+    protected void lazyLoad() {
+        if (!isPrepared || !isVisible || !isFirst) {
+            return;
+        }
         init();
-    }
-
-
-    /**
-     * 不可见
-     */
-    protected void onInvisible() {
-
-
+        isFirst = false;
     }
 
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         isPrepared = false;
         ButterKnife.unbind(this);
-    }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
         if(mPresenter != null) {
             mPresenter.onDestroy();
         }
+        super.onDestroyView();
+
     }
+
 }
