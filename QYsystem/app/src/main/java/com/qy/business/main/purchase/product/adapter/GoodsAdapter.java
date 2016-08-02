@@ -17,6 +17,6 @@ public class GoodsAdapter extends RecyclerArrayAdapter<Goods> {
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        return new GoodsViewHolder(parent);
     }
 }

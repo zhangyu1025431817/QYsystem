@@ -17,6 +17,7 @@
         app:contentInsetStart="0px">
 
         <ImageButton
+            android:id="@+id/btn_return"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/btn_image_background_transparent_dark"

@@ -3,6 +3,7 @@ package com.qy.business.main.purchase.product;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +22,17 @@ import java.util.List;
 /**
  * Created by zhangyu on 2016/8/1.
  */
-public class ProductListFragment extends BaseFragment<ProductPurchasePresenter,ProductPurchaseModel> implements ProductPurchaseContract.View, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
+public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, ProductPurchaseModel> implements ProductPurchaseContract.View, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     private EasyRecyclerView mRecyclerView;
     private GoodsAdapter mGoodsAdapter;
     private ShopAdapter mShopAdapter;
     private int page = 0;
     private String mCategoryId;
-    public static ProductListFragment newInstance(String categoryId){
+
+    public static ProductListFragment newInstance(String categoryId) {
         Bundle arguments = new Bundle();
-        arguments.putBoolean("lazyLoad",false);
-        arguments.putString("categoryId",categoryId);
+        arguments.putBoolean("lazyLoad", false);
+        arguments.putString("categoryId", categoryId);
         ProductListFragment fragment = new ProductListFragment();
         fragment.setArguments(arguments);
         return fragment;
@@ -39,36 +41,35 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter,P
     @Override
     public View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRecyclerView = new EasyRecyclerView(getActivity());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setRefreshListener(this);
-        return  mRecyclerView;
+        return mRecyclerView;
     }
 
     @Override
     public void init() {
-        mCategoryId = getArguments().getString("categoryId","0");
+        mCategoryId = getArguments().getString("categoryId", "0");
         showGoods();
     }
 
-
-    public void showGoods(){
+    public void showGoods() {
         page = 0;
-        if(mGoodsAdapter == null){
-            mGoodsAdapter = new GoodsAdapter(getActivity());
-            mGoodsAdapter.setMore(R.layout.view_more, this);
-            mGoodsAdapter.setNoMore(R.layout.view_nomore);
-            mGoodsAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(int position) {
+        mGoodsAdapter = new GoodsAdapter(getActivity());
+        mGoodsAdapter.setMore(R.layout.view_more, this);
+        mGoodsAdapter.setNoMore(R.layout.view_nomore);
+        mGoodsAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
 
-                }
-            });
-        }
-        mRecyclerView.setAdapter(mGoodsAdapter);
+            }
+        });
+        mRecyclerView.setAdapterWithProgress(mGoodsAdapter);
         onRefresh();
     }
-    public void showShop(){
-        page =0;
-        if(mShopAdapter == null){
+
+    public void showShop() {
+        page = 0;
+        if (mShopAdapter == null) {
             mShopAdapter = new ShopAdapter(getActivity());
             mShopAdapter.setMore(R.layout.view_more, this);
             mShopAdapter.setNoMore(R.layout.view_nomore);
@@ -81,6 +82,7 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter,P
         }
         mRecyclerView.setAdapter(mShopAdapter);
     }
+
     @Override
     public void showShopList(List<Shop> list) {
         mShopAdapter.addAll(list);
@@ -93,10 +95,10 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter,P
 
     @Override
     public void onLoadMore() {
-        if(mRecyclerView.getAdapter() == mGoodsAdapter) {
-            mPresenter.getGoodsList(page,20,mCategoryId,"","","","");
-        }else {
-            mPresenter.getShopList(page,20,mCategoryId,"","","","");
+        if (mRecyclerView.getAdapter() == mGoodsAdapter) {
+            mPresenter.getGoodsList(page, 20, mCategoryId, "", "", "", "");
+        } else {
+            mPresenter.getShopList(page, 20, mCategoryId, "", "", "", "");
         }
         page++;
     }
@@ -104,10 +106,10 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter,P
     @Override
     public void onRefresh() {
         page = 0;
-        if(mRecyclerView.getAdapter() == mGoodsAdapter) {
-            mPresenter.getGoodsList(page,20,mCategoryId,"","","","");
-        }else {
-            mPresenter.getShopList(page,20,mCategoryId,"","","","");
+        if (mRecyclerView.getAdapter() == mGoodsAdapter) {
+            mPresenter.getGoodsList(page, 20, mCategoryId, "", "", "", "");
+        } else {
+            mPresenter.getShopList(page, 20, mCategoryId, "", "", "", "");
         }
         page = 1;
     }

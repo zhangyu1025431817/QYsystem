@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.qy.business.R;
 import com.qy.business.bean.ProductCategory;
@@ -20,6 +22,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Observable;
 import rx.functions.Action1;
 
@@ -33,6 +36,8 @@ public class ProductPurchaseActivity extends AppCompatActivity{
     ViewPager mViewPager;
     @Bind(R.id.tabs)
     TabLayout tabs;
+    @Bind(R.id.btn_return)
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,42 +52,33 @@ public class ProductPurchaseActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         final List<Fragment> fragments = new ArrayList<>();
         List<ProductCategory> list = DataProvider.productCategoryList();
-        List<String> ids = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         for(ProductCategory bean : list){
-            ids.add(bean.getSupplygcate_id());
             titles.add(bean.getSupplygcate_name());
+            fragments.add(ProductListFragment.newInstance(bean.getSupplygcate_id()));
         }
-        Observable.from(ids).subscribe(new Action1<String>() {
-            @Override
-            public void call(String id) {
-                fragments.add(ProductListFragment.newInstance(id));
-            }
-        });
         mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(),fragments,titles));
         tabs.setupWithViewPager(mViewPager);
-        tabs.setTabsFromPagerAdapter(mViewPager.getAdapter());
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_shopping_cart, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle toolbar item clicks here. It'll
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         switch (id) {
             case R.id.action_cart:
-                // Open the search view on the menu item click.
 
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @OnClick(R.id.btn_return)
+    public void onReturn(View view){
+        finish();
     }
 }

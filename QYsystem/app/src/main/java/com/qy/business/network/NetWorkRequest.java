@@ -76,7 +76,7 @@ public class NetWorkRequest {
     public static Observable<ShopBean> getShopList(int page, int limit, String supplyId, String cateId
             , String brandId, String areaId, String keyword) {
         return Network.getApiService().getShopList(page, limit, supplyId, cateId, brandId, areaId, keyword)
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
     }
@@ -84,7 +84,7 @@ public class NetWorkRequest {
     public static Observable<GoodsBean> getGoodsList(int page, int limit, String supplyId, String cateId
             , String brandId, String areaId, String keyword) {
         return Network.getApiService().getGoodsList(page, limit, supplyId, cateId, brandId, areaId, keyword)
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }
