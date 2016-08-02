@@ -4,6 +4,7 @@ import android.content.res.TypedArray;
 
 import com.qy.business.R;
 import com.qy.business.bean.IconBean;
+import com.qy.business.bean.ProductCategory;
 import com.qy.business.main.MyApplication;
 
 import java.util.ArrayList;
@@ -62,5 +63,16 @@ public class DataProvider {
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
+    }
+    public static List<ProductCategory> productCategoryList(){
+        List<ProductCategory> list = new ArrayList<>();
+        list.add(new ProductCategory("52","新鲜蔬菜"));
+        list.add(new ProductCategory("14","时令水果"));
+        list.add(new ProductCategory("5","休闲食品"));
+        list.add(new ProductCategory("6","饼干糖果"));
+        list.add(new ProductCategory("7","饮料酒水"));
+        list.add(new ProductCategory("8","牛奶乳品"));
+        list.add(new ProductCategory("9","粮油"));
+        return list;
     }
 }

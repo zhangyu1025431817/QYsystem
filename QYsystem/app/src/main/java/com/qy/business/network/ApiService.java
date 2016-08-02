@@ -1,11 +1,13 @@
 package com.qy.business.network;
 
 import com.qy.business.bean.CommonBean;
+import com.qy.business.bean.GoodsBean;
 import com.qy.business.bean.ISBindBean;
 import com.qy.business.bean.LoginReturnBean;
 import com.qy.business.bean.NewShopBean;
 import com.qy.business.bean.RegionListBean;
 import com.qy.business.bean.RegisterGetBackBean;
+import com.qy.business.bean.ShopBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -34,8 +36,15 @@ public interface ApiService {
     Observable<ISBindBean> commitBindPhone(@Query("username") String username, @Query("userpass") String password, @Query("imei") String imei, @Query("code") String code, @Query("phone") String phone);
 
     @GET(ApiUrl.register)
-    Observable<RegisterGetBackBean> register(@Query("username") String userName,@Query("userpass") String userpass,@Query("areas[]") String province
-            ,@Query("areas[]") String city,@Query("areas[]") String area,@Query("identity_id") String identity_id,@Query("fullname") String fullName
-            ,@Query("phone") String phone,@Query("com_name") String com_name,@Query("com_address") String com_address,@Query("cer_num") String cer_num
-            ,@Query("comtype_id")String comtype_id,@Query("maintype") String maintype);
+    Observable<RegisterGetBackBean> register(@Query("username") String userName, @Query("userpass") String userpass, @Query("areas[]") String province
+            , @Query("areas[]") String city, @Query("areas[]") String area, @Query("identity_id") String identity_id, @Query("fullname") String fullName
+            , @Query("phone") String phone, @Query("com_name") String com_name, @Query("com_address") String com_address, @Query("cer_num") String cer_num
+            , @Query("comtype_id") String comtype_id, @Query("maintype") String maintype);
+
+    @GET(ApiUrl.shop)
+    Observable<ShopBean> getShopList(@Query("page") int page, @Query("limit") int limit, @Query("supplygcate_id") String supplyId, @Query("cid") String cateId
+            , @Query("brand_id") String brandId, @Query("area_id") String areaId, @Query("keyword") String keyword);
+    @GET(ApiUrl.goods)
+    Observable<GoodsBean> getGoodsList(@Query("page") int page, @Query("limit") int limit, @Query("supplygcate_id") String supplyId, @Query("cid") String cateId
+            , @Query("brand_id") String brandId, @Query("area_id") String areaId, @Query("keyword") String keyword);
 }

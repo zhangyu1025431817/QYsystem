@@ -22,4 +22,8 @@ public class ApiUrl {
     public static final String provinceInfo = "getregion.html";
     //注册
     public static final String register = "register.html";
+    //商家列标
+    public static final String shop = "buyshop";
+    //商品列标
+    public static final String goods="buygoods";
 }
