@@ -28,13 +28,12 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
     private ShopAdapter mShopAdapter;
     private int page = 0;
     private String mCategoryId;
+    private int mCurrentType = 1;
 
     public static ProductListFragment newInstance(String categoryId) {
-        Bundle arguments = new Bundle();
-        arguments.putBoolean("lazyLoad", false);
-        arguments.putString("categoryId", categoryId);
         ProductListFragment fragment = new ProductListFragment();
-        fragment.setArguments(arguments);
+        fragment.closeLazyLoad();
+        fragment.setCategoryId(categoryId);
         return fragment;
     }
 
@@ -46,14 +45,26 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
         return mRecyclerView;
     }
 
-    @Override
-    public void init() {
-        mCategoryId = getArguments().getString("categoryId", "0");
-        showGoods();
+    public void setCategoryId(String id) {
+        mCategoryId = id;
     }
 
-    public void showGoods() {
+    @Override
+    public void init() {
+        if (mCurrentType == 0) {
+            showShop();
+        } else {
+            showGoods();
+        }
+    }
+
+    private void showGoods() {
         page = 0;
+        if (mGoodsAdapter != null) {
+            mGoodsAdapter.removeAllHeader();
+            mGoodsAdapter.removeAllFooter();
+            mGoodsAdapter = null;
+        }
         mGoodsAdapter = new GoodsAdapter(getActivity());
         mGoodsAdapter.setMore(R.layout.view_more, this);
         mGoodsAdapter.setNoMore(R.layout.view_nomore);
@@ -67,30 +78,36 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
         onRefresh();
     }
 
-    public void showShop() {
+    private void showShop() {
         page = 0;
-        if (mShopAdapter == null) {
-            mShopAdapter = new ShopAdapter(getActivity());
-            mShopAdapter.setMore(R.layout.view_more, this);
-            mShopAdapter.setNoMore(R.layout.view_nomore);
-            mShopAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(int position) {
-
-                }
-            });
+        if (mShopAdapter != null) {
+            mShopAdapter.removeAllHeader();
+            mShopAdapter.removeAllFooter();
+            mShopAdapter = null;
         }
+        mShopAdapter = new ShopAdapter(getActivity());
+        mShopAdapter.setMore(R.layout.view_more, this);
+        mShopAdapter.setNoMore(R.layout.view_nomore);
+        mShopAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
         mRecyclerView.setAdapter(mShopAdapter);
+        onRefresh();
     }
 
     @Override
     public void showShopList(List<Shop> list) {
         mShopAdapter.addAll(list);
+        mRecyclerView.setRefreshing(false);
     }
 
     @Override
     public void showGoodsList(List<Goods> list) {
         mGoodsAdapter.addAll(list);
+        mRecyclerView.setRefreshing(false);
     }
 
     @Override
@@ -105,6 +122,7 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
 
     @Override
     public void onRefresh() {
+        mRecyclerView.setRefreshing(true);
         page = 0;
         if (mRecyclerView.getAdapter() == mGoodsAdapter) {
             mPresenter.getGoodsList(page, 20, mCategoryId, "", "", "", "");
@@ -112,5 +130,16 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
             mPresenter.getShopList(page, 20, mCategoryId, "", "", "", "");
         }
         page = 1;
+    }
+
+    public void changeType(int type) {
+        mCurrentType = type;
+        if (isVisible()) {
+            if (type == 0) {
+                showShop();
+            } else {
+                showGoods();
+            }
+        }
     }
 }

@@ -39,12 +39,8 @@ public abstract class BaseFragment<T extends BasePresenter, M extends BaseModel>
         if (this instanceof BaseView) mPresenter.setVM(this, mModel);
         rootView = getContentView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
-        Bundle bundle = getArguments();
-        if(bundle != null) {
-            isLazyLoad = bundle.getBoolean("lazyLoad", true);
-            if (!isLazyLoad) {
-                init();
-            }
+        if (!isLazyLoad) {
+            init();
         }
         return rootView;
     }
@@ -98,4 +94,7 @@ public abstract class BaseFragment<T extends BasePresenter, M extends BaseModel>
 
     }
 
+    public void closeLazyLoad(){
+        isLazyLoad = false;
+    }
 }

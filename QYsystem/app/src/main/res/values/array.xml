@@ -56,15 +56,15 @@
     <string-array name="system_icon">
         <item>@drawable/icon_fix_phone</item>
         <item>@drawable/icon_phone_recharge</item>
-        <item>@drawable/icon_qq</item>
-        <item>@drawable/icon_traffic_punish</item>
         <item>@drawable/icon_water_electricity_recharge</item>
-        <item>@drawable/icon_game_recharge</item>
+        <item>@drawable/icon_traffic_punish</item>
         <item>@drawable/icon_clip_buy</item>
+        <item>@drawable/icon_qq</item>
+        <item>@drawable/icon_game_recharge</item>
+        <item>@drawable/icon_credit_card</item>
         <item>@drawable/icon_alipay</item>
         <item>@drawable/icon_yibao</item>
         <item>@drawable/icon_caifutong</item>
-        <item>@drawable/icon_credit_card</item>
         <item>@drawable/icon_sell_order</item>
         <item>@drawable/icon_fix_phone</item>
         <item>@drawable/icon_phone_recharge</item>
@@ -107,15 +107,15 @@
     <string-array name="system_icon_name">
         <item>固话宽带缴费</item>
         <item>手机充值</item>
-        <item>Q币Q点充值</item>
-        <item>交通罚款</item>
         <item>水电气缴费</item>
-        <item>游戏充值</item>
+        <item>交通罚款</item>
         <item>卡密购买</item>
+        <item>Q币Q点充值</item>
+        <item>游戏充值</item>
+        <item>信用卡还款</item>
         <item>支付宝充值</item>
         <item>易宝充值</item>
         <item>财付通充值</item>
-        <item>信用卡还款</item>
         <item>销售订单</item>
         <item>固话宽带缴费</item>
         <item>手机充值</item>

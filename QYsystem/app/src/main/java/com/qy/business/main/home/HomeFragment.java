@@ -11,16 +11,16 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.qy.business.R;
 import com.qy.business.bean.Ad;
 import com.qy.business.bean.IconBean;
-import com.qy.business.main.base.BaseFragment;
 import com.qy.business.common.DividerGridItemDecoration;
 import com.qy.business.common.IconAdapter;
+import com.qy.business.main.base.BaseFragment;
 import com.qy.business.main.home.adapter.BannerAdapter;
 import com.qy.business.tools.DensityUtils;
+import com.qy.business.view.MyRollPagerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +64,11 @@ public class HomeFragment extends BaseFragment<HomePresenter,HomeModel> implemen
             mIconAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
                 @Override
                 public View onCreateView(ViewGroup parent) {
-                    RollPagerView header = new RollPagerView(getActivity());
+                    MyRollPagerView header = new MyRollPagerView(getActivity());
                     header.setHintView(new ColorPointHintView(getActivity(), Color.YELLOW, Color.GRAY));
                     header.setHintPadding(0, 0, 0, DensityUtils.dp2px(getActivity(), 8));
                     header.setPlayDelay(2000);
-                    header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtils.dp2px(getActivity(), 200)));
+                    header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,300));
                     header.setAdapter(mBannerAdapter = new BannerAdapter(getActivity(), mAdList));
                     return header;
                 }
