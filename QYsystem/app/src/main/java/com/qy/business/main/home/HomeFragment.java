@@ -20,7 +20,7 @@ import com.qy.business.common.IconAdapter;
 import com.qy.business.main.base.BaseFragment;
 import com.qy.business.main.home.adapter.BannerAdapter;
 import com.qy.business.tools.DensityUtils;
-import com.qy.business.view.MyRollPagerView;
+import com.qy.business.view.AutoRollPagerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class HomeFragment extends BaseFragment<HomePresenter,HomeModel> implemen
             mIconAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
                 @Override
                 public View onCreateView(ViewGroup parent) {
-                    MyRollPagerView header = new MyRollPagerView(getActivity());
+                    AutoRollPagerView header = new AutoRollPagerView(getActivity());
                     header.setHintView(new ColorPointHintView(getActivity(), Color.YELLOW, Color.GRAY));
                     header.setHintPadding(0, 0, 0, DensityUtils.dp2px(getActivity(), 8));
                     header.setPlayDelay(2000);

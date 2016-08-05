@@ -4,19 +4,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.qy.business.bean.ProductCategory;
+
 import java.util.List;
 
 /**
- * Created by baixiaokang on 16/5/8.
+ * Created by zhangyu on 16/8/1.
  */
 public class FragmentAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> mFragments;
-    private List<String> mTitles;
+    private List<ProductCategory> mCategoryList;
 
-    public FragmentAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
+    public FragmentAdapter(FragmentManager fm, List<Fragment> fragments, List<ProductCategory> categoryList) {
         super(fm);
         mFragments = fragments;
-        mTitles = titles;
+        mCategoryList = categoryList;
     }
 
     @Override
@@ -31,6 +33,6 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTitles.get(position);
+        return mCategoryList.get(position).getSupplygcate_name();
     }
 }

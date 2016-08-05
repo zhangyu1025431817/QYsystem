@@ -1,9 +1,11 @@
 package com.qy.business.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangyu on 2016/8/2.
  */
-public class ProductCategory {
+public class ProductCategory implements Serializable {
     String supplygcate_id;
     String supplygcate_name;
 

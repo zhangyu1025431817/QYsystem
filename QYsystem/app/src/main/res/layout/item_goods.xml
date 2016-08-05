@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qy.business.view.AutoCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -8,26 +7,20 @@
     android:paddingRight="8dp"
     android:paddingTop="8dp">
 
-    <LinearLayout
+    <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:orientation="vertical"
-            android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:scaleType="centerCrop"/>
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="200px"
+            android:layout_height="240px"
+            android:scaleType="centerCrop" />
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
@@ -38,36 +31,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="VR in future"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textColor="#333"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_des"
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:layout_marginTop="20px"
                 android:text="see：4000000"
-                android:textSize="12sp"/>
+                android:textColor="#ccc"
+                android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/tv_info"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="18sp"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:text="VR（Virtual Reality，即虚拟现实，简称VRY），是由美国VPL公司创建人拉尼尔（Jaron Lanier）"/>
+                android:layout_alignParentBottom="true"
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="05-20 "/>
-        </LinearLayout>
+                >
+
+                <TextView
+                    android:id="@+id/tv_r"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="￥" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_r"
+                    android:gravity="center"
+
+                    android:text="6"
+                    android:textColor="#d10000"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/tv_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_price"
+                    android:gravity="center"
+                    android:text="/袋" />
+
+                <ImageButton
+                    android:id="@+id/btn_shopping_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="10px"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/btn_image_background_transparent_dark"
+                    android:src="@drawable/icon_shopping_cart_add" />
+            </RelativeLayout>
+
+        </com.zhy.autolayout.AutoRelativeLayout>
 
 
-    </LinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
 
-</android.support.v7.widget.CardView>
+</com.qy.business.view.AutoCardView>

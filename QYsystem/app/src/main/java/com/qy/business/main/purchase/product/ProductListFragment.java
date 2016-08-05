@@ -30,10 +30,13 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
     private String mCategoryId;
     private int mCurrentType = 1;
 
-    public static ProductListFragment newInstance(String categoryId) {
+    public static ProductListFragment newInstance(String categoryId, int type) {
         ProductListFragment fragment = new ProductListFragment();
-        fragment.closeLazyLoad();
-        fragment.setCategoryId(categoryId);
+        Bundle bundle = new Bundle();
+        bundle.putString("categoryId", categoryId);
+        bundle.putInt("type", type);
+        bundle.putBoolean("lazyLoad", false);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -45,18 +48,24 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
         return mRecyclerView;
     }
 
-    public void setCategoryId(String id) {
-        mCategoryId = id;
-    }
-
     @Override
     public void init() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            if (bundle.containsKey("categoryId")) {
+                mCategoryId = bundle.getString("categoryId");
+            }
+            if (bundle.containsKey("type")) {
+                mCurrentType = bundle.getInt("type");
+            }
+        }
         if (mCurrentType == 0) {
             showShop();
         } else {
             showGoods();
         }
     }
+
 
     private void showGoods() {
         page = 0;
@@ -132,14 +141,28 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
         page = 1;
     }
 
+    /**
+     * when the type changed
+     *
+     * @param type 0-shop , 1-goods
+     */
     public void changeType(int type) {
-        mCurrentType = type;
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            if (bundle.containsKey("type")) {
+                bundle.putInt("type", type);
+            }
+        }
+        //如果当前界面正在显示
         if (isVisible()) {
             if (type == 0) {
                 showShop();
             } else {
                 showGoods();
             }
+        } else {
+            setArguments(bundle);
         }
+
     }
 }

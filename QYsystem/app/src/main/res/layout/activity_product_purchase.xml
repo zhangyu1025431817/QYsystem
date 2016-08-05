@@ -72,15 +72,29 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
-            android:background="#f6f6f6"
-            android:layout_toLeftOf="@id/btn_type_more"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btn_type_more"
+            android:background="#f6f6f6"
             app:tabGravity="fill"
             app:tabMode="scrollable" />
     </com.zhy.autolayout.AutoRelativeLayout>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:visibility="invisible"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
 </com.zhy.autolayout.AutoLinearLayout>

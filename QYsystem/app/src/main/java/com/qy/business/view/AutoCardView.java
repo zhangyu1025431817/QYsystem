@@ -1,32 +1,38 @@
 package com.qy.business.view;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 
-import com.jude.rollviewpager.RollPagerView;
-import com.zhy.autolayout.AutoRelativeLayout;
+import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.utils.AutoLayoutHelper;
 
 /**
- * Created by zhangyu on 2016/8/3.
+ * Created by zhy on 15/12/8.
  */
-public class MyRollPagerView extends RollPagerView {
+public class AutoCardView extends CardView
+{
     private final AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
-    public MyRollPagerView(Context context) {
+
+    public AutoCardView(Context context)
+    {
         super(context);
     }
 
-    public MyRollPagerView(Context context, AttributeSet attrs) {
+    public AutoCardView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
     }
 
-    public MyRollPagerView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-    @Override
-    public AutoRelativeLayout.LayoutParams generateLayoutParams(AttributeSet attrs)
+    public AutoCardView(Context context, AttributeSet attrs, int defStyleAttr)
     {
-        return new AutoRelativeLayout.LayoutParams(getContext(), attrs);
+        super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    public AutoFrameLayout.LayoutParams generateLayoutParams(AttributeSet attrs)
+    {
+        return new AutoFrameLayout.LayoutParams(getContext(), attrs);
     }
 
     @Override
@@ -38,5 +44,6 @@ public class MyRollPagerView extends RollPagerView {
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
+
 
 }

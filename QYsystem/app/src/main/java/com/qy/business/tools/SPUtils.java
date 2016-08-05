@@ -2,7 +2,14 @@ package com.qy.business.tools;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -199,5 +206,65 @@ public class SPUtils
 			editor.commit();
 		}
 	}
+	/**
+	 * 针对复杂类型存储<对象>
+	 */
+	public static void putObject(Context context,String key, Object object) {
+		SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
 
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream out = null;
+		try {
+			out = new ObjectOutputStream(baos);
+			out.writeObject(object);
+			String objectVal = new String(Base64.encode(baos.toByteArray(), Base64.DEFAULT));
+			SharedPreferences.Editor editor = sp.edit();
+			editor.putString(key, objectVal);
+			SharedPreferencesCompat.apply(editor);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (baos != null) {
+					baos.close();
+				}
+				if (out != null) {
+					out.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public static  Object getObject(Context context,String key) {
+		SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+		if (sp.contains(key)) {
+			String objectVal = sp.getString(key, null);
+			byte[] buffer = Base64.decode(objectVal, Base64.DEFAULT);
+			ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+			ObjectInputStream ois = null;
+			try {
+				ois = new ObjectInputStream(bais);
+				return ois.readObject();
+			} catch (StreamCorruptedException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (bais != null) {
+						bais.close();
+					}
+					if (ois != null) {
+						ois.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
 }
