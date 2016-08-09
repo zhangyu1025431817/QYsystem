@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.qy.business.R;
@@ -41,21 +40,17 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
     private static final int SHOP = 0;
     private static final int GOODS = 1;
     @Bind(R.id.id_tool_bar)
-    Toolbar mToolbar;
+    Toolbar toolbar;
     @Bind(R.id.viewpager)
-    ViewPager mViewPager;
+    ViewPager viewPager;
     @Bind(R.id.tabs)
     TabLayout tabs;
-    @Bind(R.id.btn_return)
-    ImageButton imageButton;
-    @Bind(R.id.btn_type_more)
-    ImageButton mBtnTypeMore;
     @Bind(R.id.tv_type)
     TextView tvType;
     @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
-    private int currentType = GOODS;
-    private List<Fragment> fragmentList = new ArrayList<>();
+    RecyclerView recyclerView;
+    private int mCurrentType = GOODS;
+    private List<Fragment> mFragmentList = new ArrayList<>();
     private ItemTouchHelper mItemTouchHelper;
     private List<ProductCategory> mCategoryList = new ArrayList<>();
     private RecyclerListAdapter mRecyclerListAdapter;
@@ -70,7 +65,7 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
     }
 
     public void initView() {
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         List<ProductCategory> list = (List<ProductCategory>) SPUtils.getObject(this, "category");
         if (list == null) {
@@ -82,26 +77,27 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
         setCategories();
         //初始化种类下拉列表
         initDropList();
+
     }
 
     private void setCategories() {
-        fragmentList.clear();
+        mFragmentList.clear();
         for (ProductCategory bean : mCategoryList) {
-            fragmentList.add(ProductListFragment.newInstance(bean.getSupplygcate_id(),currentType));
+            mFragmentList.add(ProductListFragment.newInstance(bean.getSupplygcate_id(),mCurrentType));
         }
-        mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), fragmentList, mCategoryList));
-        tabs.setupWithViewPager(mViewPager);
+        viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), mFragmentList, mCategoryList));
+        tabs.setupWithViewPager(viewPager);
     }
 
     private void initDropList() {
         mRecyclerListAdapter = new RecyclerListAdapter(this, mCategoryList);
 
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(mRecyclerListAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(mRecyclerListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mRecyclerListAdapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -130,27 +126,27 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
 
     @OnClick(R.id.tv_type)
     public void checkType() {
-        if (currentType == SHOP) {
+        if (mCurrentType == SHOP) {
             tvType.setText("商品");
-            currentType = GOODS;
+            mCurrentType = GOODS;
         } else {
             tvType.setText("店铺");
-            currentType = SHOP;
+            mCurrentType = SHOP;
         }
-        for (Fragment f : fragmentList) {
-            ((ProductListFragment) f).changeType(currentType);
+        for (Fragment f : mFragmentList) {
+            ((ProductListFragment) f).changeType(mCurrentType);
         }
     }
 
     @OnClick(R.id.btn_type_more)
     public void showMoreType() {
-        if (mRecyclerView.getVisibility() == View.VISIBLE) {
-            mRecyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.hide));
-            mRecyclerView.setVisibility(View.INVISIBLE);
+        if (recyclerView.getVisibility() == View.VISIBLE) {
+            recyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.hide));
+            recyclerView.setVisibility(View.INVISIBLE);
             saveSort();
-        } else if (mRecyclerView.getVisibility() == View.INVISIBLE) {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mRecyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.shown));
+        } else if (recyclerView.getVisibility() == View.INVISIBLE) {
+            recyclerView.setVisibility(View.VISIBLE);
+            recyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.shown));
         }
     }
 
@@ -162,6 +158,7 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
     }
 
     private void saveSort() {
+        //拖动过后才修改
         if (isDrag) {
             isDrag = false;
             mCategoryList.clear();
@@ -174,9 +171,9 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {// 按下的如果是BACK，同时没有重复
-            if (mRecyclerView.getVisibility() == View.VISIBLE) {
-                mRecyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.hide));
-                mRecyclerView.setVisibility(View.INVISIBLE);
+            if (recyclerView.getVisibility() == View.VISIBLE) {
+                recyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.hide));
+                recyclerView.setVisibility(View.INVISIBLE);
                 saveSort();
             } else {
                 finish();

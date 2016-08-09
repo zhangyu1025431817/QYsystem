@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30px">
+
+    <ImageView
+        android:id="@+id/iv_goods_photo"
+        android:layout_width="200px"
+        android:layout_height="260px"
+        android:background="@drawable/bg_hotport" />
+
+    <TextView
+        android:id="@+id/tv_goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_goods_photo"
+        android:padding="10px"
+        android:text="秦妈火锅底料350g"
+        android:textColor="#333"
+        android:textSize="26px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_goods_name"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@id/iv_goods_photo"
+        android:gravity="center"
+        android:text="￥" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_goods_name"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@id/tv_r"
+        android:gravity="center"
+        android:text="6"
+        android:textColor="#d10000"
+        android:textSize="30px" />
+
+    <TextView
+        android:id="@+id/tv_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_goods_name"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@id/tv_price"
+        android:gravity="center"
+        android:text="/袋" />
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iv_goods_photo"
+        android:layout_toRightOf="@id/iv_goods_photo"
+        android:padding="10px"
+        android:text="数量:"
+        android:textColor="#333"
+        android:textSize="26px"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iv_add_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_count"
+        android:layout_toRightOf="@id/tv_count"
+        android:padding="10px"
+        android:src="@drawable/tv_add_count" />
+
+    <TextView
+        android:id="@+id/tv_count_number"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_count"
+        android:layout_toRightOf="@id/iv_add_count"
+        android:background="@drawable/tv_goods_count"
+        android:gravity="center"
+        android:padding="10px"
+        android:text="0"
+        android:textColor="#d10000"
+        android:textSize="20px" />
+
+    <ImageView
+        android:id="@+id/iv_minus_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_count"
+        android:layout_toRightOf="@id/tv_count_number"
+        android:padding="10px"
+        android:src="@drawable/tv_minus_count" />
+
+    <TextView
+        android:id="@+id/tv_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_goods_photo"
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="60px"
+        android:text="商品总价:"
+        android:textColor="#333"
+        android:textSize="20px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_total_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_01"
+        android:layout_marginLeft="4px"
+        android:layout_toRightOf="@id/tv_01"
+        android:text="0元"
+        android:textColor="#d10000"
+        android:textSize="26px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_add_to_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_total_money"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/tv_buy_click_circle"
+        android:padding="10px"
+        android:text="确定加入"
+        android:textColor="@color/white" />
+</com.zhy.autolayout.AutoRelativeLayout>

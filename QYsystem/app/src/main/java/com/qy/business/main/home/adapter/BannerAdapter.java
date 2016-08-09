@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
-import com.qy.business.R;
 import com.qy.business.bean.Ad;
 
 import java.util.List;
@@ -18,9 +17,11 @@ public class BannerAdapter extends StaticPagerAdapter {
 
     private Context ctx;
     private List<Ad> list;
-       public BannerAdapter(Context ctx ,List<Ad> list){
+    private int mDefaultRes;
+       public BannerAdapter(Context ctx ,List<Ad> list,int defaultRes){
            this.ctx = ctx;
            this.list = list;
+           mDefaultRes = defaultRes;
         }
 
         @Override
@@ -31,7 +32,7 @@ public class BannerAdapter extends StaticPagerAdapter {
             //加载图片
             Glide.with(ctx)
                     .load(list.get(position).getImage())
-                    .placeholder(R.drawable.bg_banner)
+                    .placeholder(mDefaultRes)
                     .into(imageView);
             //点击事件
             imageView.setOnClickListener(new View.OnClickListener() {

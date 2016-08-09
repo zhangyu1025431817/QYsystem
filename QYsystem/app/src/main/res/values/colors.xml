@@ -11,8 +11,10 @@
     <color name="btn_bg_press">#FF1BA2DF</color>
     <color name="bg_regist_item">#f3f3f4</color>
     <color name="icon_system_press">#f0f0f0</color>
-
+    <color name="red_normal">#d10000</color>
+    <color name="red_press">#c10000</color>
     <color name="white">#ffffff</color><!-- 白色 -->
+    <color name="common_gray">#ccc</color>
 
     <color name="privategray">#bebebe</color><!-- 自定义灰色 -->
 

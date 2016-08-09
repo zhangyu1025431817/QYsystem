@@ -65,11 +65,12 @@ public class HomeFragment extends BaseFragment<HomePresenter,HomeModel> implemen
                 @Override
                 public View onCreateView(ViewGroup parent) {
                     AutoRollPagerView header = new AutoRollPagerView(getActivity());
+
                     header.setHintView(new ColorPointHintView(getActivity(), Color.YELLOW, Color.GRAY));
                     header.setHintPadding(0, 0, 0, DensityUtils.dp2px(getActivity(), 8));
                     header.setPlayDelay(2000);
                     header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,300));
-                    header.setAdapter(mBannerAdapter = new BannerAdapter(getActivity(), mAdList));
+                    header.setAdapter(mBannerAdapter = new BannerAdapter(getActivity(), mAdList,R.drawable.bg_banner));
                     return header;
                 }
 

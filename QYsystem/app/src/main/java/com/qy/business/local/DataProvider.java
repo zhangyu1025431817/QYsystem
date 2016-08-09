@@ -3,6 +3,7 @@ package com.qy.business.local;
 import android.content.res.TypedArray;
 
 import com.qy.business.R;
+import com.qy.business.bean.Ad;
 import com.qy.business.bean.IconBean;
 import com.qy.business.bean.ProductCategory;
 import com.qy.business.main.MyApplication;
@@ -74,5 +75,14 @@ public class DataProvider {
         list.add(new ProductCategory("8","牛奶乳品"));
         list.add(new ProductCategory("9","粮油"));
         return list;
+    }
+
+    public static List<Ad> getAdList(){
+        ArrayList<Ad> arr = new ArrayList<>();
+        arr.add(new Ad("","http://www.bilibili.com/topic/v2/1004.html"));
+        arr.add(new Ad("","http://www.bilibili.com/topic/1003.html"));
+        arr.add(new Ad("","http://yoo.bilibili.com/html/activity/cq2015/index.html"));
+        arr.add(new Ad("","http://www.bilibili.com/html/activity-acsociety.html"));
+        return arr;
     }
 }

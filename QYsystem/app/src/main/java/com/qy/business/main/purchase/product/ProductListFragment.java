@@ -1,5 +1,6 @@
 package com.qy.business.main.purchase.product;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,6 +17,7 @@ import com.qy.business.bean.Shop;
 import com.qy.business.main.base.BaseFragment;
 import com.qy.business.main.purchase.product.adapter.GoodsAdapter;
 import com.qy.business.main.purchase.product.adapter.ShopAdapter;
+import com.qy.business.main.purchase.product.detail.ProductDetailActivity;
 
 import java.util.List;
 
@@ -80,7 +82,12 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
         mGoodsAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Goods bean = mGoodsAdapter.getItem(position);
+                Intent intent = new Intent();
+                intent.putExtra("goodsId",bean.getGoods_id());
+                intent.putExtra("goodsName",bean.getGoods_name());
+                intent.setClass(getActivity(), ProductDetailActivity.class);
+                startActivity(intent);
             }
         });
         mRecyclerView.setAdapterWithProgress(mGoodsAdapter);
