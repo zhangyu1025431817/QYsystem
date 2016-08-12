@@ -33,16 +33,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
     EditText mEnsurePwd;
     @Bind(R.id.et_company_name)
     EditText mEtCompanyName;
-    @Bind(R.id.et_business_address)
-    EditText mEtManageAddress;
-    @Bind(R.id.et_license_number)
-    EditText mEtLicenseNumber;
     @Bind(R.id.et_legal_person_name)
     EditText mEtLegalPersonName;
-    @Bind(R.id.et_identity_card)
-    EditText mEtIdentityCard;
-    @Bind(R.id.et_contact_phone_number)
-    EditText mEtPhone;
     @Bind(R.id.et_contact_address)
     EditText mEtContactAddress;
     @Bind(R.id.sp_province)
@@ -51,8 +43,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
     Spinner mSpCity;
     @Bind(R.id.sp_area)
     Spinner mSpArea;
-    @Bind(R.id.sp_manage_type)
-    Spinner mSpManageType;
     @Bind(R.id.cb_register)
     CheckBox mCbRegister;
     @Bind(R.id.cb_supplier)
@@ -61,7 +51,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
     CheckBox mCbSale;
     @Bind(R.id.id_tool_bar)
     Toolbar mToolbar;
-    private String[] mManageTypeIds;
     String[] mProvinceNames, mCityNames, mAreaNames;
     String[] mProvinceIds, mCityIds, mAreaIds;
     private String mProvinceId, mCityId, mAreaId, mManageType;
@@ -78,7 +67,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.icon_return);
         mDialogDelegate = new SweetAlertDialogDelegate(this);
-        initManageType();
         loadProvinceInfo();
     }
 
@@ -96,25 +84,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
     void onAreaItemSelected(int position){
         mAreaId = mAreaIds[position];
     }
-    @OnItemSelected(R.id.sp_manage_type)
-    void onManageItemSelected(int position){
-        mManageType = mManageTypeIds[position];
-    }
+
     private void loadProvinceInfo() {
         mPresenter.loadProvinceInfo();
     }
-
-    private void initManageType() {
-        String[] mManageTypeNames = getResources().getStringArray(R.array.maintype_name);
-        mManageTypeIds = getResources().getStringArray(R.array.maintype_id);
-
-        ArrayAdapter adapter = new ArrayAdapter<CharSequence>(RegisterActivity.this, R.layout.item_spinner, mManageTypeNames);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);// 下拉列表中每个条目的样式
-        mSpManageType.setAdapter(adapter);
-    }
-
-
-
 
     @Override
     public void showProgressError(String stateCode, String msg) {
@@ -128,8 +101,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
 
     @Override
     public void showSucceed() {
-
-        mDialogDelegate.stopProgressWithSuccess("用户注册", "注册成功", new DialogDelegate.OnDialogListener() {
+        mDialogDelegate.stopProgressWithSuccess("注册成功", "注册成功", new DialogDelegate.OnDialogListener() {
             @Override
             public void onClick() {
                 mDialogDelegate.clearDialog();
@@ -213,32 +185,19 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
             T.showShort(this, "请输入正确公司名称!");
             return;
         }
-        String manageAddress = mEtManageAddress.getText().toString().trim();
-        if (manageAddress.isEmpty()) {
-            T.showShort(this, "请输入营业地址!");
-            return;
-        }
-        String licenseNumber = mEtLicenseNumber.getText().toString().trim();
-        if (licenseNumber.length() < 4) {
-            T.showShort(this, "请输入有效的执照号码!");
-            return;
-        }
+        String manageAddress = "";
+
+        String licenseNumber = "";
+
+        String identityCard = "";
+
+        String phoneNumber = "";
         String legalPerson = mEtLegalPersonName.getText().toString().trim();
         if (!StringUtils.chinesename(legalPerson)) {
             T.showShort(this, "请输入有效的法人姓名!");
             return;
         }
 
-        String identityCard = mEtIdentityCard.getText().toString().trim();
-        if (!StringUtils.personIdValidation(identityCard)) {
-            T.showShort(this, "请输入有效的身份证号码!");
-            return;
-        }
-        String phoneNumber = mEtPhone.getText().toString().trim();
-        if (!StringUtils.checkPhone(phoneNumber)) {
-            T.showShort(this, "请输入有效的手机号码!");
-            return;
-        }
         String contactAddress = mEtContactAddress.getText().toString().trim();
         if (contactAddress.length() < 4) {
             T.showShort(this, "请输入有效的联系地址!");
@@ -261,7 +220,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
         }
 
         mDialogDelegate.showProgressDialog(false,"正在注册");
-        mPresenter.register(name, password, mProvinceId, mCityId, mAreaId, identityCard, legalPerson, phoneNumber, company, manageAddress, licenseNumber, type, mManageType);
+        mPresenter.register(name, password, mProvinceId, mCityId, mAreaId, identityCard, legalPerson, phoneNumber, company, contactAddress, licenseNumber, type, "");
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

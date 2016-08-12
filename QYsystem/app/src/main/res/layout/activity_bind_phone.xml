@@ -4,109 +4,206 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/view_toolbar" />
-
-    <LinearLayout
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding_20">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btn_return"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_image_background_transparent_dark"
+            android:src="@drawable/icon_return" />
 
         <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="安全验证"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </com.zhy.autolayout.AutoRelativeLayout>
 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/safe_password"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_size_20" />
-
-        <EditText
-            android:id="@+id/et_safe_password"
-            style="@style/edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:inputType="textPassword" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100px"
+        android:background="@color/snow"
+        android:drawableLeft="@drawable/icon_blue_circle"
+        android:drawablePadding="10px"
+        android:gravity="center_vertical"
+        android:paddingLeft="36px"
+        android:text="绑定手机"
+        android:textColor="@color/common_gray"
+        android:textSize="24px" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="@dimen/padding_20">
+        android:paddingLeft="70px"
+        android:paddingRight="30px">
 
         <TextView
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="@string/phone_number"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_size_20" />
+            android:textColor="#333"
+            android:textSize="26px" />
 
         <EditText
             android:id="@+id/et_phone_number"
-            style="@style/edit_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
-            android:inputType="number" />
-    </LinearLayout>
+            android:hint="+86"
+            android:inputType="number"
+            android:textSize="24px" />
+    </com.zhy.autolayout.AutoLinearLayout>
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1px"
+        android:background="@color/D6D7DC" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding_20">
+        android:paddingLeft="70px"
+        android:paddingRight="30px">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/message_authentication_code"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_size_20" />
+            android:textColor="#333"
+            android:textSize="26px" />
 
         <EditText
             android:id="@+id/et_message_code"
-            style="@style/edit_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:textSize="24px"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_weight="1" />
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/btn_message_code"
+            android:layout_width="wrap_content"
+            android:layout_height="46px"
+            android:padding="10px"
+            android:background="@drawable/btn_login"
+            android:gravity="center"
+            android:text="@string/get_authentication_code"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@color/snow"
+        android:drawableLeft="@drawable/icon_blue_circle"
+        android:drawablePadding="10px"
+        android:gravity="center_vertical"
+        android:paddingLeft="36px"
+        android:text="设置安全密码"
+        android:textColor="@color/common_gray"
+        android:textSize="24px" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="70px"
+        android:paddingRight="30px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="安全密码:"
+            android:textColor="#333"
+            android:textSize="26px" />
+
+        <EditText
+            android:id="@+id/et_safe_password"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:inputType="textPassword"
+            android:textSize="24px" />
+        <ImageView
+            android:id="@+id/iv_safe_password_show"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="@dimen/padding_4">
+            android:padding="20px"
+            android:background="@drawable/btn_image_background_transparent_dark"
+            android:src="@drawable/icon_eye"/>
+    </com.zhy.autolayout.AutoLinearLayout>
 
-            <Button
-                android:id="@+id/btn_message_code"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_edit_height"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/D6D7DC" />
 
-                android:background="@drawable/tv_get_message"
-                android:text="@string/get_authentication_code"
-                android:textColor="@color/colorWhite" />
-        </LinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="70px"
+        android:paddingRight="30px">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="确认密码:"
+            android:textColor="#333"
+            android:textSize="26px" />
 
-    </LinearLayout>
+        <EditText
+            android:id="@+id/et_confirm_safe_password"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:inputType="textPassword"
+            android:textSize="24px" />
+        <ImageView
+            android:id="@+id/iv_safe_confirm_password_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_image_background_transparent_dark"
+            android:padding="20px"
+            android:src="@drawable/icon_eye"/>
+    </com.zhy.autolayout.AutoLinearLayout>
 
     <Button
         android:id="@+id/btn_commit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_20"
-        android:layout_marginRight="@dimen/margin_20"
-        android:layout_marginTop="@dimen/margin_30"
+        android:layout_height="80px"
+        android:layout_marginTop="129px"
         android:background="@drawable/btn_login"
         android:text="@string/_commit"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/font_size_20" />
+        android:textColor="@color/white"
+        android:textSize="30px" />
 </com.zhy.autolayout.AutoLinearLayout>

@@ -7,6 +7,7 @@ import com.qy.business.bean.LoginReturnBean;
 import com.qy.business.bean.NewShopBean;
 import com.qy.business.bean.RegionListBean;
 import com.qy.business.bean.RegisterGetBackBean;
+import com.qy.business.bean.SafeVerify;
 import com.qy.business.bean.ShopBean;
 
 import retrofit2.http.GET;
@@ -32,8 +33,9 @@ public interface ApiService {
     @GET(ApiUrl.messageCode)
     Observable<ISBindBean> getMessageCode(@Query("username") String username, @Query("userpass") String password, @Query("phone") String phone);
 
-    @GET(ApiUrl.bindPhone)
-    Observable<ISBindBean> commitBindPhone(@Query("username") String username, @Query("userpass") String password, @Query("imei") String imei, @Query("code") String code, @Query("phone") String phone);
+    @GET(ApiUrl.checkphonepaypassword)
+    Observable<SafeVerify> checkPhonePayPassword(@Query("username") String username, @Query("userpass") String password, @Query("imei") String imei, @Query("phone") String code,
+                                                 @Query("code") String phone, @Query("pwd") String safePwd);
 
     @GET(ApiUrl.register)
     Observable<RegisterGetBackBean> register(@Query("username") String userName, @Query("userpass") String userpass, @Query("areas[]") String province
@@ -44,6 +46,7 @@ public interface ApiService {
     @GET(ApiUrl.shop)
     Observable<ShopBean> getShopList(@Query("page") int page, @Query("limit") int limit, @Query("supplygcate_id") String supplyId, @Query("cid") String cateId
             , @Query("brand_id") String brandId, @Query("area_id") String areaId, @Query("keyword") String keyword);
+
     @GET(ApiUrl.goods)
     Observable<GoodsBean> getGoodsList(@Query("page") int page, @Query("limit") int limit, @Query("supplygcate_id") String supplyId, @Query("cid") String cateId
             , @Query("brand_id") String brandId, @Query("area_id") String areaId, @Query("keyword") String keyword);

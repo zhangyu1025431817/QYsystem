@@ -2,25 +2,17 @@ package com.qy.business.main.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.qy.business.R;
-import com.qy.business.bean.NewShopInfo;
 import com.qy.business.main.base.BaseActivity;
+import com.qy.business.main.login.bind.BindPhoneActivity;
 import com.qy.business.main.login.regist.RegisterActivity;
-import com.qy.business.main.main.MainActivity;
 import com.qy.business.tools.T;
 import com.qy.business.view.DialogDelegate;
 import com.qy.business.view.SweetAlertDialogDelegate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -45,6 +37,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     private static final String DEVICE_NOT_BIND_PHONE_NOT_BIND = "8";
     //未设置安全密码
     private static final String SAFE_PASSWORD_NOT_SET = "9";
+    //未绑定手机号
+    private static final String PHONE_NOT_BIND= "10";
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     @Bind(R.id.et_account)
@@ -81,40 +75,45 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     public void initData() {
         mDialogDelegate = new SweetAlertDialogDelegate(this);
         mContext = this;
-        /**
-         * 请求新进驻供应商
-         */
-        mPresenter.showNewShop();
+
 
     }
 
     @Override
     public void showProgressError(String stateCode, String msg) {
 
-//        if (DEVICE_NOT_BIND.equals(stateCode) || DEVICE_NOT_BIND_PHONE_NOT_BIND.equals(stateCode)) {
-//            mDialogDelegate.showWarningDialog(msg, msg, new DialogDelegate.OnDialogListener() {
-//                @Override
-//                public void onClick() {
-//                    startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
-//                }
-//            });
-//        } else if (ACCOUNT_BIND_ANOTHER_DEVICE_PHONE_BIND.equals(stateCode)) {
-//
-//        } else if (ACCOUNT_BIND_ANOTHER_DEVICE_PHONE_NOT_BIND.equals(stateCode)) {
-//
-//        } else if (DEVICE_BIND_ANOTHER_ACCOUNT_PHONE_BIND.equals(stateCode)) {
-//
-//        } else if (DEVICE_BIND_ANOTHER_ACCOUNT_PHONE_NOT_BIND.equals(stateCode)) {
-//
-//        } else if (DEVICE_NOT_BIND_PHONE_BIND.equals(stateCode)) {
-//
-//        } else if (SAFE_PASSWORD_NOT_SET.equals(stateCode)) {
-//
-//        } else {
- //           mDialogDelegate.stopProgressWithFailed(msg, msg);
-          //  startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
-  //      }
-        showSucceed();
+        if (DEVICE_NOT_BIND.equals(stateCode) || DEVICE_NOT_BIND_PHONE_NOT_BIND.equals(stateCode)) {
+            mDialogDelegate.showWarningDialog(msg, msg, new DialogDelegate.OnDialogListener() {
+                @Override
+                public void onClick() {
+                    startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
+                }
+            });
+        } else if (ACCOUNT_BIND_ANOTHER_DEVICE_PHONE_BIND.equals(stateCode)) {
+
+        } else if (ACCOUNT_BIND_ANOTHER_DEVICE_PHONE_NOT_BIND.equals(stateCode)) {
+
+        } else if (DEVICE_BIND_ANOTHER_ACCOUNT_PHONE_BIND.equals(stateCode)) {
+
+        } else if (DEVICE_BIND_ANOTHER_ACCOUNT_PHONE_NOT_BIND.equals(stateCode)) {
+
+        } else if (DEVICE_NOT_BIND_PHONE_BIND.equals(stateCode)) {
+
+        } else if (SAFE_PASSWORD_NOT_SET.equals(stateCode)) {
+            mDialogDelegate.stopProgressWithWarning("安全密码", "请设置安全密码", new DialogDelegate.OnDialogListener() {
+                @Override
+                public void onClick() {
+
+                }
+            });
+        } else if(PHONE_NOT_BIND.equals(stateCode)) {
+
+
+        }else{
+            mDialogDelegate.stopProgressWithFailed(msg, msg);
+            startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
+        }
+       // showSucceed();
     }
 
     @Override
@@ -125,27 +124,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     @Override
     public void showSucceed() {
         mDialogDelegate.clearDialog();
-        startActivity(new Intent(this, MainActivity.class));
+       // startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, BindPhoneActivity.class));
     }
 
-
-    @Override
-    public void showNewShop(List<NewShopInfo> list) {
-        try {
-            List<View> views = new ArrayList<>();
-            for (NewShopInfo info : list) {
-                View v = LayoutInflater.from(mContext).inflate(R.layout.item_new_shop, null);
-                ImageView iv = (ImageView) v.findViewById(R.id.iv_icon);
-                TextView tv = (TextView) v.findViewById(R.id.tv_name);
-                Glide.with(mContext).load(info.getShoplogo()).placeholder(R.drawable.default_bg)
-                        .centerCrop().into(iv);
-                tv.setText(info.getShop_name());
-                views.add(v);
-            }
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public String getAccount() {

@@ -1,18 +1,16 @@
 package com.qy.business.network;
 
-import com.qy.business.bean.CommonBean;
 import com.qy.business.bean.GoodsBean;
 import com.qy.business.bean.ISBindBean;
 import com.qy.business.bean.LoginReturnBean;
 import com.qy.business.bean.NewShopBean;
 import com.qy.business.bean.RegionListBean;
 import com.qy.business.bean.RegisterGetBackBean;
+import com.qy.business.bean.SafeVerify;
 import com.qy.business.bean.ShopBean;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -40,30 +38,17 @@ public class NetWorkRequest {
 
     }
 
-    public static void getMessageCode(final String userName, final String password, String safePassword, final String phone, final Subscriber<ISBindBean> subscriber) {
-        Network.getApiService().verifyPassword(userName, password, safePassword)
-                .flatMap(new Func1<CommonBean, Observable<ISBindBean>>() {
-                    @Override
-                    public Observable<ISBindBean> call(CommonBean bean) {
-                        if (bean == null) {
-                            return Observable.error(new Throwable(SERVICE_RESPONSE_ERROR));
-                        }
-                        if (bean.getStatus() != 1) {
-                            return Observable.error(new Throwable(bean.getMsg()));
-                        }
-                        return Network.getApiService().getMessageCode(userName, password, phone);
-                    }
-                })
+    public static Observable<ISBindBean> getMessageCode(final String userName, final String password, final String phone) {
+        return Network.getApiService().getMessageCode(userName, password,phone)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .observeOn(AndroidSchedulers.mainThread());
+
     }
 
-    public static void commitBindPhone(String userName, String password, String imei, String code, String phone, Subscriber<ISBindBean> subscriber) {
-        Network.getApiService().commitBindPhone(userName, password, imei, code, phone)
+    public static Observable<SafeVerify> checkPhonePayPassword(String userName, String password, String imei, String code, String phone, String safePwd) {
+       return Network.getApiService().checkPhonePayPassword(userName, password, imei, code, phone,safePwd)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public static Observable<RegisterGetBackBean> register(String userName, String password, String province, String city, String area, String identityId, String fullName,

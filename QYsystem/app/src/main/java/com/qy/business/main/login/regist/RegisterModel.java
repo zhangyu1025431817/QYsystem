@@ -36,6 +36,7 @@ public class RegisterModel implements RegisterMvp.Model {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
+                e.printStackTrace();
                 listener.onError(e.getMessage());
             }
         });

@@ -9,12 +9,13 @@
     <color name="login_bg">#d1f2ff</color>
     <color name="btn_bg_normal">#1daef0</color>
     <color name="btn_bg_press">#FF1BA2DF</color>
-    <color name="bg_regist_item">#f3f3f4</color>
+    <color name="bg_regist_item">#f4f4f4</color>
     <color name="icon_system_press">#f0f0f0</color>
     <color name="red_normal">#d10000</color>
     <color name="red_press">#c10000</color>
     <color name="white">#ffffff</color><!-- 白色 -->
     <color name="common_gray">#ccc</color>
+    <color name="D6D7DC">#d6d7dc</color>
 
     <color name="privategray">#bebebe</color><!-- 自定义灰色 -->
 
@@ -28,7 +29,7 @@
 
     <color name="yellow">#FFFF00</color> <!-- 黄色 -->
 
-    <color name="snow">#FFFAFA</color> <!-- 雪白色 -->
+    <color name="snow">#FAFAFA</color> <!-- 雪白色 -->
 
     <color name="floralwhite">#FFFAF0</color> <!-- 花白色 -->
 

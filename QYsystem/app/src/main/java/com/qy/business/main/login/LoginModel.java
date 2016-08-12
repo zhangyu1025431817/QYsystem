@@ -2,25 +2,15 @@ package com.qy.business.main.login;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
 import com.qy.business.R;
-import com.qy.business.config.Constant;
-import com.qy.business.main.MyApplication;
 import com.qy.business.bean.LoginReturnBean;
 import com.qy.business.bean.LoginReturnDataBean;
-import com.qy.business.bean.NewShopBean;
-import com.qy.business.bean.NewShopInfo;
+import com.qy.business.main.MyApplication;
 import com.qy.business.network.MySubscriber;
 import com.qy.business.network.NetWorkRequest;
 import com.qy.business.tools.AESHelper;
 import com.qy.business.tools.SPUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import okhttp3.Call;
 import rx.Subscription;
 
 /**
@@ -35,12 +25,6 @@ public class LoginModel implements LoginContract.Model {
         void onSucceed();
     }
 
-    public interface OnLoadNewShopDataListener {
-        void onError(String msg);
-
-        void onSucceed(List<NewShopInfo> list);
-    }
-
 
     @Override
     public Subscription loadUserData(String account, String password, String ime, final OnLoginListener listener) {
@@ -51,7 +35,7 @@ public class LoginModel implements LoginContract.Model {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                listener.onError("-1", context.getResources().getString(R.string.please_check_net));
+                listener.onError("-1", e.getMessage());
             }
 
             @Override
@@ -78,82 +62,4 @@ public class LoginModel implements LoginContract.Model {
             }
         });
     }
-
-    @Override
-    public void loadNewShopData(final OnLoadNewShopDataListener listener) {
-//        NetWorkRequest.loadNewShopData(new MySubscriber<NewShopBean>() {
-//            @Override
-//            public void onError(Throwable e) {
-//                super.onError(e);
-//                listener.onError(context.getResources().getString(R.string.please_check_net));
-//            }
-//
-//            @Override
-//            public void onNext(NewShopBean newShopBean) {
-//                super.onNext(newShopBean);
-//                if (newShopBean == null) {
-//                    listener.onError(context.getResources().getString(R.string.json_error));
-//                }
-//                if (newShopBean.getStatus() == 1) {
-//                    LinkedList<NewShopInfo> infoList = newShopBean.getData();
-//                    listener.onSucceed(infoList);
-//                } else {
-//                    listener.onError(newShopBean.getMsg());
-//                }
-//            }
-//        });
-        /**
-         * 因为base URL 不一样，后台代码又不能该，为了不影响整体架构就单独写了一个请求
-         */
-        String url = Constant.URL + "/business/newsupplier.html";
-        OkHttpUtils
-                .get()
-                .url(url)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        listener.onError(context.getResources().getString(R.string.please_check_net));
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Gson gson = new Gson();
-                        NewShopBean bean = gson.fromJson(response, NewShopBean.class);
-                        if (bean == null) {
-                            listener.onError(context.getResources().getString(R.string.json_error));
-                        }
-                        if (bean.getStatus() == 1) {
-                            LinkedList<NewShopInfo> infoList = bean.getData();
-                            listener.onSucceed(infoList);
-                        } else {
-                            listener.onError(bean.getMsg());
-                        }
-
-                    }
-                });
-//                .execute(new Callback() {
-//                    @Override
-//                    public void onError(Request request, Exception e) {
-//                        listener.onError(context.getResources().getString(R.string.please_check_net));
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Gson gson = new Gson();
-//                        NewShopBean bean = gson.fromJson(response, NewShopBean.class);
-//                        if (bean == null) {
-//                            listener.onError(context.getResources().getString(R.string.json_error));
-//                        }
-//                        if (bean.getStatus() == 1) {
-//                            LinkedList<NewShopInfo> infoList = bean.getData();
-//                            listener.onSucceed(infoList);
-//                        } else {
-//                            listener.onError(bean.getMsg());
-//                        }
-//                    }
-//                });
-    }
-
-
 }

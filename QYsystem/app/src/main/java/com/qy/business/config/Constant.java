@@ -19,7 +19,7 @@ public class Constant {
     //新进驻商家
     public static final String newSupplier = URL+"/business/newsupplier.html";
     //登录
-    public static final String login = URL+PUBBUSINESS+"/login.html";
+    public static final String login = URL+PUBBUSINESS+"/loginnew.html";
     //获取验证码
     public static final String messageCode = URL+PUBBUSINESS+"/getcode.html";
     //验证安全码

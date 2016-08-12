@@ -112,12 +112,18 @@ public class SweetAlertDialogDelegate implements DialogDelegate {
     }
 
     @Override
-    public void stopProgressWithSuccess(String option,String msg, OnDialogListener listener) {
+    public void stopProgressWithSuccess(String option, String msg, final OnDialogListener listener) {
         if (pDialog != null) {
             mTimer.cancel();
             pDialog.setTitleText(msg)
                     .setTitleText(option)
                     .setConfirmText("确定")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            listener.onClick();
+                        }
+                    })
                     .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
 
         }

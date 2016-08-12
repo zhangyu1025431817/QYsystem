@@ -18,7 +18,7 @@
         />
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_name"
-        android:layout_width="362px"
+        android:layout_width="600px"
         android:layout_marginTop="50px"
         android:layout_height="wrap_content">
 
@@ -36,7 +36,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_password"
-        android:layout_width="362px"
+        android:layout_width="600px"
         android:layout_marginTop="20px"
         android:layout_height="wrap_content">
 
@@ -53,16 +53,18 @@
 
     <TextView
         android:id="@+id/tv_forget_pwd"
-        android:layout_width="362px"
+        android:layout_width="600px"
         android:gravity="right"
+        android:paddingBottom="10px"
+        android:paddingTop="10px"
         android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginTop="12px"
         android:text="忘记密码"/>
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="362px"
-        android:layout_height="59px"
+        android:layout_width="600px"
+        android:layout_height="80px"
         android:layout_marginTop="20px"
         android:background="@drawable/btn_login"
         android:text="@string/_login"

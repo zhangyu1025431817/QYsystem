@@ -5,9 +5,6 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 import com.qy.business.main.MyApplication;
-import com.qy.business.bean.NewShopInfo;
-
-import java.util.List;
 
 /**
  * Created by zhangyu on 2016/5/11.
@@ -35,21 +32,6 @@ public class LoginPresenter extends LoginContract.Presenter{
                 mView.showSucceed();
             }
         }));
-    }
-
-    @Override
-    public void showNewShop() {
-        mModel.loadNewShopData(new LoginModel.OnLoadNewShopDataListener() {
-            @Override
-            public void onError(String msg) {
-              //  mLoginView.showError(msg);
-            }
-
-            @Override
-            public void onSucceed(List<NewShopInfo> list) {
-                mView.showNewShop(list);
-            }
-        });
     }
 
     @Override

@@ -1,11 +1,11 @@
 package com.qy.business.main.login.bind;
 
 import android.os.CountDownTimer;
-import android.support.v7.widget.Toolbar;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.qy.business.R;
 import com.qy.business.main.base.BaseActivity;
@@ -15,18 +15,26 @@ import com.qy.business.view.DialogDelegate;
 import com.qy.business.view.SweetAlertDialogDelegate;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by zhangyu on 2016/5/12.
  */
-public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhoneModel> implements View.OnClickListener, BindPhoneContract.View {
+public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhoneModel> implements  BindPhoneContract.View {
+    @Bind(R.id.et_phone_number)
+     EditText editTextPhoneNumber;
+    @Bind(R.id.et_message_code)
+     EditText editTextMessageCode;
+    @Bind(R.id.btn_message_code)
+    TextView btnGetCode;
+    @Bind(R.id.et_safe_password)
+    EditText editTextSafePassword;
+    @Bind(R.id.et_confirm_safe_password)
+    EditText editTextConfirmSafePassword;
+    private boolean isSafePwdShow = false;
+    private boolean isSafePwdConfirmShow = false;
 
-    private EditText mEtSafePassword;
-    private EditText mEtPhoneNumber;
-    private EditText mEtMessageCode;
-    private Button mBtnGetCode;
-    @Bind(R.id.id_tool_bar)
-    Toolbar mToolbar;
+
     private CountDownTimer mTimer;
     private int mCount = 60;
     private DialogDelegate mDialogDelegate;
@@ -37,15 +45,15 @@ public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhon
         mTimer = new CountDownTimer(1000 * 60, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mBtnGetCode.setEnabled(false);
-                mBtnGetCode.setText(mCount + getString(R.string.get_again));
+                btnGetCode.setEnabled(false);
+                btnGetCode.setText(mCount + getString(R.string.get_again));
                 mCount--;
             }
 
             @Override
             public void onFinish() {
-                mBtnGetCode.setText(getString(R.string.get_authentication_code));
-                mBtnGetCode.setEnabled(true);
+                btnGetCode.setText(getString(R.string.get_authentication_code));
+                btnGetCode.setEnabled(true);
                 mCount = 60;
             }
         };
@@ -65,68 +73,68 @@ public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhon
 
     @Override
     public void initView() {
-        findViewById(R.id.btn_commit).setOnClickListener(this);
-        mEtSafePassword = (EditText) findViewById(R.id.et_safe_password);
-        mEtPhoneNumber = (EditText) findViewById(R.id.et_phone_number);
-        mEtMessageCode = (EditText) findViewById(R.id.et_message_code);
-        mBtnGetCode = (Button) findViewById(R.id.btn_message_code);
-
-        mBtnGetCode.setOnClickListener(this);
-        mToolbar.setTitle("手机绑定");
-        setSupportActionBar(mToolbar);
-
-
         initData();
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_message_code:
-                if (isPasswordValid() && isPhoneNumberValid()) {
-                    mTimer.start();
-                    mPresenter.getMessageCode();
-                }
-                break;
-            case R.id.btn_commit:
-                if (isPasswordValid() && isPhoneNumberValid() && isMessageCodeValid()) {
-                    mDialogDelegate.showProgressDialog(false, getResources().getString(R.string._commit_ing));
-                    mPresenter.commit();
-                }
-                break;
+    @OnClick(R.id.btn_message_code)
+    public void getMsgCode(){
+        if (isPhoneNumberValid()) {
+            mTimer.start();
+            mPresenter.getMessageCode();
         }
-
+    }
+    @OnClick(R.id.btn_commit)
+    public void commit(){
+        if (isPhoneNumberValid() && isMessageCodeValid()&&isSafePasswordValid()) {
+            mDialogDelegate.showProgressDialog(false, getResources().getString(R.string._commit_ing));
+            mPresenter.commit();
+        }
+    }
+    @OnClick(R.id.btn_return)
+    public void onReturn(){
+        finish();
+    }
+    @OnClick(R.id.iv_safe_password_show)
+    public void showSafePassword(){
+        if(!isSafePwdConfirmShow){
+            //如果选中，显示密码
+            editTextSafePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        }else{
+            //否则隐藏密码
+            editTextSafePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        }
+        isSafePwdConfirmShow= !isSafePwdConfirmShow;
+    }
+    @OnClick(R.id.iv_safe_confirm_password_show)
+    public void showSafePasswordConfirm(){
+        if(!isSafePwdShow){
+            //如果选中，显示密码
+            editTextConfirmSafePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        }else{
+            //否则隐藏密码
+            editTextConfirmSafePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        }
+        isSafePwdShow = !isSafePwdShow;
     }
 
     @Override
     public String getSafePassword() {
-
-        return mEtSafePassword.getText().toString();
+        return editTextSafePassword.getText().toString().trim();
     }
 
     @Override
     public String getPhoneNumber() {
 
-        return mEtPhoneNumber.getText().toString();
+        return editTextPhoneNumber.getText().toString();
     }
 
     @Override
     public String getMessageCode() {
 
-        return mEtMessageCode.getText().toString();
-    }
-
-    private boolean isPasswordValid() {
-        String safePassword = mEtSafePassword.getText().toString();
-        if (safePassword.isEmpty()) {
-            T.showShort(this, R.string.safe_password_not_be_null);
-            return false;
-        }
-        return true;
+        return editTextMessageCode.getText().toString();
     }
 
     private boolean isPhoneNumberValid() {
-        String phoneNumber = mEtPhoneNumber.getText().toString();
+        String phoneNumber = editTextPhoneNumber.getText().toString();
         if (phoneNumber.isEmpty()) {
             T.showShort(this, R.string.phone_number_not_be_null);
             return false;
@@ -139,7 +147,7 @@ public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhon
     }
 
     private boolean isMessageCodeValid() {
-        String messageCode = mEtMessageCode.getText().toString();
+        String messageCode = editTextMessageCode.getText().toString();
         if (messageCode.isEmpty()) {
             T.showShort(this, R.string.message_code_not_be_null);
             return false;
@@ -147,6 +155,23 @@ public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhon
         return true;
     }
 
+    private boolean isSafePasswordValid(){
+        String safePassword = editTextSafePassword.getText().toString().trim();
+        String confirmPassword = editTextConfirmSafePassword.getText().toString().trim();
+        if(safePassword.isEmpty()){
+            T.showShort(this, R.string.safe_password_not_be_null);
+            return false;
+        }
+        if(safePassword.length() < 6){
+            T.showShort(this, R.string.safe_password_not_less_than_six);
+            return false;
+        }
+        if(!safePassword.equals(confirmPassword)){
+            T.showShort(this, R.string.safe_password_confirm_not_same);
+            return false;
+        }
+        return true;
+    }
     @Override
     public void showProgressError(String stateCode, String msg) {
         mDialogDelegate.stopProgressWithFailed(msg,msg);

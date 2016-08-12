@@ -7,14 +7,14 @@ package com.qy.business.bean;
  */
 public class ISBindBean {
 	private String s;//是否绑定了账户  1已经绑定  -1未绑定
-	private int status;
+	private String status;
 	private String msg;
 	
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
