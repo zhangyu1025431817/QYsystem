@@ -4,14 +4,14 @@ package com.qy.business.bean;
  * Created by zhangyu on 2016/8/11.
  */
 public class SafeVerify {
-    int status;
+    String status;
     String msg;
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

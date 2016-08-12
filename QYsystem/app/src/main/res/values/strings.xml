@@ -13,7 +13,7 @@
     <string name="message_authentication_code">验证码:</string>
     <string name="get_authentication_code">发送验证码</string>
     <string name="bind_phone_number">绑定手机号码</string>
-    <string name="bind_success">绑定成功!</string>
+    <string name="bind_success">验证成功!</string>
     <string name="_commit">提交</string>
     <string name="bind_now">立即绑定</string>
     <string name="_return">返回</string>

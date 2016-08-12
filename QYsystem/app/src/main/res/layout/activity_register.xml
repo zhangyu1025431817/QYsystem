@@ -230,8 +230,6 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@drawable/bg_layout_rectangle_gray"
-
-            android:inputType="textPassword"
             android:paddingLeft="20px"
             android:singleLine="true"
             android:textSize="@dimen/font_size_14" />

@@ -18,7 +18,7 @@ public interface BindPhoneContract {
 
          * @param phoneNumber 手机号
          */
-        Observable<ISBindBean> getMessageCode(String phoneNumber);
+        Observable<ISBindBean> getMessageCode(String userName,String password,String phoneNumber);
 
         /**
          * 提交绑定
@@ -26,9 +26,11 @@ public interface BindPhoneContract {
          * @param phoneNumber 手机号
          * @param code 验证码
          */
-        Observable<SafeVerify> commit(String phoneNumber, String code, String safePassword);
+        Observable<SafeVerify> commit(String userName,String password,String phoneNumber, String code, String safePassword);
     }
     interface View extends BaseProgressView {
+        String getUserName();
+        String getPassword();
         String getSafePassword();
         String getPhoneNumber();
         String getMessageCode();

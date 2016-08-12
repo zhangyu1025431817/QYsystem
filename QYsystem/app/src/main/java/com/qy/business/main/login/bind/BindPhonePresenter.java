@@ -11,7 +11,8 @@ public class BindPhonePresenter extends BindPhoneContract.Presenter {
     @Override
     public void getMessageCode() {
         final String phoneNumber = mView.getPhoneNumber();
-        mRxManager.add(mModel.getMessageCode(phoneNumber).subscribe(new MySubscriber<ISBindBean>() {
+
+        mRxManager.add(mModel.getMessageCode(mView.getUserName(), mView.getPassword(), phoneNumber).subscribe(new MySubscriber<ISBindBean>() {
             @Override
             public void onNext(ISBindBean isBindBean) {
                 super.onNext(isBindBean);
@@ -34,28 +35,30 @@ public class BindPhonePresenter extends BindPhoneContract.Presenter {
     public void commit() {
         String phoneNumber = mView.getPhoneNumber();
         String messageCode = mView.getMessageCode();
-        String safePassword = mView.getSafePassword();
-        mRxManager.add(mModel.commit(phoneNumber, messageCode, safePassword).subscribe(new MySubscriber<SafeVerify>(){
+        final String safePassword = mView.getSafePassword();
+        mRxManager.add(mModel.commit(mView.getUserName(), mView.getPassword(), phoneNumber, messageCode, safePassword).subscribe(new MySubscriber<SafeVerify>() {
             @Override
             public void onNext(SafeVerify bean) {
                 super.onNext(bean);
-                switch (bean.getStatus()){
-                    case 2:
-                        mView.showProgressError("手机绑定","验证码过期或错误，请重新获取");
-                        break;
-                    case 3:
-                        mView.showProgressError("手机绑定","该手机号已绑定其他用户，请重新输入手机号");
-                        break;
-                    case 15:
-                        mView.showSucceed();
-                        break;
+                String status = bean.getStatus();
+                if ("-1966".equals(status)) {
+                    mView.showProgressError("手机绑定", "验证码过期或错误，请重新获取");
+                } else if ("-1967".equals(status)) {
+                    mView.showProgressError("手机绑定", "该手机号已绑定其他用户，请重新输入手机号");
+                } else if ("-1954".equals(status)) {
+                    mView.showProgressError("手机绑定", "服务器异常");
+
+                } else if ("1".equals(status)) {
+                    mView.showSucceed();
+                } else {
+                    mView.showProgressError("手机绑定", "未知错误");
                 }
             }
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mView.showProgressError("安全验证",e.getMessage());
+                mView.showProgressError("安全验证", e.getMessage());
             }
         }));
 

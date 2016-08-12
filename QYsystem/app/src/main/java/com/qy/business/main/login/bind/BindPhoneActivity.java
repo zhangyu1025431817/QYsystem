@@ -1,5 +1,6 @@
 package com.qy.business.main.login.bind;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -33,13 +34,18 @@ public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhon
     EditText editTextConfirmSafePassword;
     private boolean isSafePwdShow = false;
     private boolean isSafePwdConfirmShow = false;
-
+    private String mUserName;
+    private String mPassword;
 
     private CountDownTimer mTimer;
     private int mCount = 60;
     private DialogDelegate mDialogDelegate;
 
     public void initData() {
+
+        Intent intent = getIntent();
+        mUserName = intent.getStringExtra("userName");
+        mPassword = intent.getStringExtra("password");
 
         mDialogDelegate = new SweetAlertDialogDelegate(this);
         mTimer = new CountDownTimer(1000 * 60, 1000) {
@@ -58,6 +64,13 @@ public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhon
             }
         };
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mTimer.cancel();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -114,6 +127,16 @@ public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhon
             editTextConfirmSafePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
         isSafePwdShow = !isSafePwdShow;
+    }
+
+    @Override
+    public String getUserName() {
+        return mUserName;
+    }
+
+    @Override
+    public String getPassword() {
+        return mPassword;
     }
 
     @Override
@@ -184,9 +207,10 @@ public class BindPhoneActivity extends BaseActivity<BindPhonePresenter, BindPhon
 
     @Override
     public void showSucceed() {
-        mDialogDelegate.stopProgressWithSuccess("手机绑定", getResources().getString(R.string.bind_success), new DialogDelegate.OnDialogListener() {
+        mDialogDelegate.stopProgressWithSuccess("安全验证", getResources().getString(R.string.bind_success), new DialogDelegate.OnDialogListener() {
             @Override
             public void onClick() {
+                mDialogDelegate.clearDialog();
                 BindPhoneActivity.this.finish();
             }
         });
