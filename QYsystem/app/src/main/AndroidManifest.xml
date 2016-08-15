@@ -54,6 +54,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".main.purchase.product.detail.ProductDetailActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".main.purchase.product.search.SearchActivity"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="design_width"
             android:value="720"/>

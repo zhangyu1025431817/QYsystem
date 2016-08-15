@@ -6,6 +6,7 @@ import com.qy.business.R;
 import com.qy.business.bean.Ad;
 import com.qy.business.bean.IconBean;
 import com.qy.business.bean.ProductCategory;
+import com.qy.business.bean.SearchKey;
 import com.qy.business.main.MyApplication;
 
 import java.util.ArrayList;
@@ -84,5 +85,23 @@ public class DataProvider {
         arr.add(new Ad("","http://yoo.bilibili.com/html/activity/cq2015/index.html"));
         arr.add(new Ad("","http://www.bilibili.com/html/activity-acsociety.html"));
         return arr;
+    }
+
+    public static Observable<List<SearchKey>> getHotKeyList(){
+        final ArrayList<SearchKey> list = new ArrayList<>();
+        list.add(new SearchKey("西红柿",1));
+        list.add(new SearchKey("牛奶",1));
+        list.add(new SearchKey("水蜜桃",1));
+        list.add(new SearchKey("芒果",1));
+        list.add(new SearchKey("来自内蒙古大草原的新鲜牛肉",1));
+        list.add(new SearchKey("奇易自营店",0));
+
+        return Observable.create(new Observable.OnSubscribe<List<SearchKey>>(){
+
+            @Override
+            public void call(Subscriber<? super List<SearchKey>> subscriber) {
+                subscriber.onNext(list);
+            }
+        });
     }
 }

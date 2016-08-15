@@ -1,5 +1,6 @@
 package com.qy.business.main.purchase.product;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -24,6 +25,7 @@ import com.qy.business.main.purchase.product.adapter.FragmentAdapter;
 import com.qy.business.main.purchase.product.adapter.RecyclerListAdapter;
 import com.qy.business.main.purchase.product.helper.OnStartDragListener;
 import com.qy.business.main.purchase.product.helper.SimpleItemTouchHelperCallback;
+import com.qy.business.main.purchase.product.search.SearchActivity;
 import com.qy.business.tools.SPUtils;
 
 import java.util.ArrayList;
@@ -49,6 +51,8 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
     TextView tvType;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+    @Bind(R.id.tv_keyword)
+    TextView textViewKeyword;
     private int mCurrentType = GOODS;
     private List<Fragment> mFragmentList = new ArrayList<>();
     private ItemTouchHelper mItemTouchHelper;
@@ -181,5 +185,9 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+    @OnClick(R.id.tv_keyword)
+    public void onKeywordClick(){
+        startActivity(new Intent(this, SearchActivity.class));
     }
 }

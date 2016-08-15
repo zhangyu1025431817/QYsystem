@@ -42,60 +42,83 @@
                 android:textColor="#ccc"
                 android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/tv_keyword"
+            <com.qy.business.view.ClearEditText
+                android:id="@+id/et_keyword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignRight="@id/tv_type"
-                android:drawableRight="@drawable/icon_search_right"
+                android:background="@color/Transparent"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="土豆"
-                android:textColor="#d9d9d9"
+                android:hint="请输入关键字"
+                android:textColorHint="#ccc"
+                android:textColor="#333"
                 android:textSize="12sp" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/btn_image_background_white_dark"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="#333"
+            android:textSize="16sp" />
     </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_hot"
+        android:drawablePadding="10px"
+        android:padding="34px"
+        android:text="热门搜索"
+        android:textColor="#ccc"
+        android:textSize="24px" />
+
+    <com.qy.business.view.flow.TagFlowLayout xmlns:zhy="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/id_flow_layout_hot"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        zhy:max_select="1">
+
+    </com.qy.business.view.flow.TagFlowLayout>
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60px"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/btn_type_more"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/btn_image_background_transparent_dark"
-            android:scaleType="center"
-            android:src="@drawable/icon_image_drop_down" />
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btn_type_more"
-            android:background="#f6f6f6"
-            app:tabGravity="fill"
-            app:tabMode="scrollable" />
+            android:drawableLeft="@drawable/icon_history"
+            android:drawablePadding="10px"
+            android:padding="34px"
+            android:text="历史搜索"
+            android:textColor="#ccc"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/tv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="34px"
+            android:text="清空"
+            android:background="@drawable/btn_image_background_transparent_dark"
+            android:textColor="#ccc"
+            android:textSize="24px" />
     </com.zhy.autolayout.AutoRelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <com.qy.business.view.flow.TagFlowLayout xmlns:zhy="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/id_flow_layout_history"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        zhy:max_select="1">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:visibility="invisible"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+    </com.qy.business.view.flow.TagFlowLayout>
 
 </com.zhy.autolayout.AutoLinearLayout>
