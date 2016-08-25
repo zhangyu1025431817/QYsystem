@@ -7,7 +7,7 @@ public class Constant {
     /**
      * 测试地址
      */
-    public static final String URL = "http://58.216.10.202:8008";
+    public static final String URL = "http://58.216.10.195:8008";
     /**
      * 正式地址
      */

@@ -1,5 +1,6 @@
 package com.qy.business.network;
 
+import com.qy.business.bean.AddCartResult;
 import com.qy.business.bean.GoodsBean;
 import com.qy.business.bean.ISBindBean;
 import com.qy.business.bean.LoginReturnBean;
@@ -69,6 +70,17 @@ public class NetWorkRequest {
     public static Observable<GoodsBean> getGoodsList(int page, int limit, String supplyId, String cateId
             , String brandId, String areaId, String keyword) {
         return Network.getApiService().getGoodsList(page, limit, supplyId, cateId, brandId, areaId, keyword)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static Observable<AddCartResult> addToShoppingCart(String name,String password,String imei,String id,String sku,int number){
+        return Network.getApiService().addToShoppingCart(name,password,imei,id,sku,number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    public static Observable<String> getAliPayOder(String order){
+        return Network.getApiService(ApiUrl.BASE_PERSONAL).getAliPayOrder(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

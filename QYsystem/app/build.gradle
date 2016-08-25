@@ -18,7 +18,7 @@ android {
         }
     }
 }
-
+android {    useLibrary 'org.apache.http.legacy'}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -52,4 +52,7 @@ dependencies {
     compile 'com.jude:rollviewpager:1.2.9'
     compile project(':banner')
     compile project(':recyclerview')
+    compile 'org.apache.httpcomponents:httpcore:4.4.1'
+    compile 'org.apache.httpcomponents:httpclient:4.5'
+    compile files('src/main/libs/alipaySdk-20160516.jar')
 }

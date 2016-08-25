@@ -1,5 +1,6 @@
 package com.qy.business.main.purchase.product;
 
+import com.qy.business.bean.AddCartResult;
 import com.qy.business.bean.Goods;
 import com.qy.business.bean.GoodsBean;
 import com.qy.business.bean.Shop;
@@ -46,5 +47,10 @@ public class ProductPurchaseModel implements ProductPurchaseContract.Model {
                 return list;
             }
         });
+    }
+
+    @Override
+    public Observable<AddCartResult> addToShoppingCart(String name, String password, String imei, String id, String sku, int number) {
+        return NetWorkRequest.addToShoppingCart(name,password,imei,id,sku,number);
     }
 }

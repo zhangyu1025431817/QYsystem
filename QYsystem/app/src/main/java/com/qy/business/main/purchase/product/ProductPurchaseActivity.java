@@ -19,8 +19,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.qy.business.R;
+import com.qy.business.bean.Goods;
 import com.qy.business.bean.ProductCategory;
 import com.qy.business.local.DataProvider;
+import com.qy.business.main.base.RxBus;
 import com.qy.business.main.purchase.product.adapter.FragmentAdapter;
 import com.qy.business.main.purchase.product.adapter.RecyclerListAdapter;
 import com.qy.business.main.purchase.product.helper.OnStartDragListener;
@@ -34,6 +36,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 /**
  * Created by zhangyu on 2016/7/28.
@@ -41,6 +44,7 @@ import butterknife.OnClick;
 public class ProductPurchaseActivity extends AppCompatActivity implements OnStartDragListener {
     private static final int SHOP = 0;
     private static final int GOODS = 1;
+    public static final String EVENT_BUS_TAG = "Goods";
     @Bind(R.id.id_tool_bar)
     Toolbar toolbar;
     @Bind(R.id.viewpager)
@@ -65,6 +69,15 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_purchase);
         ButterKnife.bind(this);
+        //注册添加到购物车事件 该事件由fragment里面的adapter发送
+        RxBus.$().register(EVENT_BUS_TAG).subscribe(new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                if(o instanceof Goods){
+
+                }
+            }
+        });
         initView();
     }
 
@@ -134,7 +147,7 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
             tvType.setText("商品");
             mCurrentType = GOODS;
         } else {
-            tvType.setText("店铺");
+            tvType.setText("供应商");
             mCurrentType = SHOP;
         }
         for (Fragment f : mFragmentList) {
@@ -189,5 +202,11 @@ public class ProductPurchaseActivity extends AppCompatActivity implements OnStar
     @OnClick(R.id.tv_keyword)
     public void onKeywordClick(){
         startActivity(new Intent(this, SearchActivity.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.$().unregister(EVENT_BUS_TAG);
     }
 }

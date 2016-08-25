@@ -12,19 +12,25 @@ import android.view.ViewGroup;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.qy.business.R;
+import com.qy.business.bean.AddCartResult;
 import com.qy.business.bean.Goods;
 import com.qy.business.bean.Shop;
+import com.qy.business.bean.SkuData;
 import com.qy.business.main.base.BaseFragment;
+import com.qy.business.main.base.RxBus;
 import com.qy.business.main.purchase.product.adapter.GoodsAdapter;
 import com.qy.business.main.purchase.product.adapter.ShopAdapter;
 import com.qy.business.main.purchase.product.detail.ProductDetailActivity;
 
 import java.util.List;
 
+import rx.functions.Action1;
+
 /**
  * Created by zhangyu on 2016/8/1.
  */
 public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, ProductPurchaseModel> implements ProductPurchaseContract.View, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+    public static final String EVENT_BUS_TAG = "result";
     private EasyRecyclerView mRecyclerView;
     private GoodsAdapter mGoodsAdapter;
     private ShopAdapter mShopAdapter;
@@ -66,6 +72,20 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
         } else {
             showGoods();
         }
+        //注册添加到购物车事件 该事件由fragment里面的adapter发送
+        RxBus.$().register(EVENT_BUS_TAG).subscribe(new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                if(o instanceof Goods){
+                    Goods goods = (Goods)o;
+                    List<SkuData> skuList = goods.getSku_list();
+                    String sku = "";
+                    if(skuList != null && !skuList.isEmpty()){
+                    }
+                  //  mPresenter.addToCart(goods.getGoods_id(),skuList == null? "",);
+                }
+            }
+        });
     }
 
 
@@ -127,6 +147,11 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
     }
 
     @Override
+    public void showCount(AddCartResult result) {
+
+    }
+
+    @Override
     public void onLoadMore() {
         if (mRecyclerView.getAdapter() == mGoodsAdapter) {
             mPresenter.getGoodsList(page, 20, mCategoryId, "", "", "", "");
@@ -140,12 +165,13 @@ public class ProductListFragment extends BaseFragment<ProductPurchasePresenter, 
     public void onRefresh() {
         mRecyclerView.setRefreshing(true);
         page = 0;
-        if (mRecyclerView.getAdapter() == mGoodsAdapter) {
-            mPresenter.getGoodsList(page, 20, mCategoryId, "", "", "", "");
-        } else {
-            mPresenter.getShopList(page, 20, mCategoryId, "", "", "", "");
-        }
-        page = 1;
+//        if (mRecyclerView.getAdapter() == mGoodsAdapter) {
+//            mPresenter.getGoodsList(page, 20, mCategoryId, "", "", "", "");
+//        } else {
+//            mPresenter.getShopList(page, 20, mCategoryId, "", "", "", "");
+//        }
+//        page = 1;
+        onLoadMore();
     }
 
     /**

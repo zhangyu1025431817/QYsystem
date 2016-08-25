@@ -24,11 +24,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
         }
         return apiService;
     }
+    public static ApiService getApiService(String baseUrl) {
+        if (apiService == null) {
+            apiService = getRetrofit(baseUrl).create(ApiService.class);
+        }
 
+        return apiService;
+    }
 
     private static Retrofit getRetrofit() {
+      return  getRetrofit(ApiUrl.BASE_API);
+    }
+    private static Retrofit getRetrofit(String baseApi) {
         return new Retrofit.Builder()
-                .baseUrl(ApiUrl.BASE_API)
+                .baseUrl(baseApi)
                 .callFactory(OkHttpUtils.getInstance().getOkHttpClient())
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJavaCallAdapterFactory)

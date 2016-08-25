@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/id_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetEnd="0px"
+        app:contentInsetLeft="0px"
+        app:contentInsetRight="0px"
+        app:contentInsetStart="0px">
+
+        <ImageButton
+            android:id="@+id/btn_return"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_image_background_transparent_dark"
+            android:src="@drawable/icon_back_home_gray" />
+
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="60px"
+            android:background="@drawable/bg_layout_rectangle_circle_selector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="5px"
+                android:drawableRight="@drawable/icon_drop_down"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="商品"
+                android:textColor="#ccc"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignRight="@id/tv_type"
+                android:drawableRight="@drawable/icon_search_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="土豆"
+                android:textColor="#d9d9d9"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</com.zhy.autolayout.AutoLinearLayout>

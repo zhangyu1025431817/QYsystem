@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.qy.business.R;
 import com.qy.business.bean.Goods;
+import com.qy.business.main.base.RxBus;
+import com.qy.business.main.purchase.product.ProductListFragment;
 
 /**
  * Created by zhangyu on 2016/8/1.
@@ -29,7 +31,7 @@ public class GoodsViewHolder extends BaseViewHolder<Goods> {
     }
 
     @Override
-    public void setData(Goods data) {
+    public void setData(final Goods data) {
         Glide.with(getContext())
                 .load(data.getTop_photos())
                 .placeholder(R.drawable.default_bg)
@@ -41,7 +43,7 @@ public class GoodsViewHolder extends BaseViewHolder<Goods> {
         btn_shopping_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                RxBus.$().post(ProductListFragment.EVENT_BUS_TAG,data);
             }
         });
     }

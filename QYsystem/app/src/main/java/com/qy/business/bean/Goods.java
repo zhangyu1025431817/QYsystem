@@ -1,5 +1,7 @@
 package com.qy.business.bean;
 
+import java.util.LinkedList;
+
 /**
  * Created by zhangyu on 2016/8/1.
  */
@@ -9,6 +11,15 @@ public class Goods {
     private String top_photos;
     private String goods_unit;
     private String goods_price;
+    private LinkedList<SkuData> sku_list;
+
+    public LinkedList<SkuData> getSku_list() {
+        return sku_list;
+    }
+
+    public void setSku_list(LinkedList<SkuData> sku_list) {
+        this.sku_list = sku_list;
+    }
 
     public String getGoods_id() {
         return goods_id;

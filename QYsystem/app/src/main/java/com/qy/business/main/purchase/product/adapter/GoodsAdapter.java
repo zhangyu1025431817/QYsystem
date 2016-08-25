@@ -11,6 +11,7 @@ import com.qy.business.bean.Goods;
  * Created by zhangyu on 2016/8/1.
  */
 public class GoodsAdapter extends RecyclerArrayAdapter<Goods> {
+
     public GoodsAdapter(Context context) {
         super(context);
     }

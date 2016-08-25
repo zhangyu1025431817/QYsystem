@@ -1,5 +1,6 @@
 package com.qy.business.network;
 
+import com.qy.business.bean.AddCartResult;
 import com.qy.business.bean.CommonBean;
 import com.qy.business.bean.GoodsBean;
 import com.qy.business.bean.ISBindBean;
@@ -50,4 +51,9 @@ public interface ApiService {
     @GET(ApiUrl.goods)
     Observable<GoodsBean> getGoodsList(@Query("page") int page, @Query("limit") int limit, @Query("supplygcate_id") String supplyId, @Query("cid") String cateId
             , @Query("brand_id") String brandId, @Query("area_id") String areaId, @Query("keyword") String keyword);
+    @GET(ApiUrl.addToCart)
+    Observable<AddCartResult> addToShoppingCart(@Query("username") String name,@Query("userpass") String password,@Query("imei") String imei
+            ,@Query("id") String goodsId,@Query("sku") String sku,@Query("num") int number);
+    @GET(ApiUrl.alipayOrder)
+    Observable<String> getAliPayOrder(@Query("order_sn") String order);
 }

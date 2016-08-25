@@ -47,7 +47,6 @@ public class BindPhonePresenter extends BindPhoneContract.Presenter {
                     mView.showProgressError("手机绑定", "该手机号已绑定其他用户，请重新输入手机号");
                 } else if ("-1954".equals(status)) {
                     mView.showProgressError("手机绑定", "服务器异常");
-
                 } else if ("1".equals(status)) {
                     mView.showSucceed();
                 } else {

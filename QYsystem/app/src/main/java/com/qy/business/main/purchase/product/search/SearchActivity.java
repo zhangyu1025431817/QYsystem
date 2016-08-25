@@ -1,5 +1,6 @@
 package com.qy.business.main.purchase.product.search;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.qy.business.R;
 import com.qy.business.bean.SearchKey;
 import com.qy.business.main.base.BaseActivity;
+import com.qy.business.main.purchase.product.search.result.SearchResultActivity;
 import com.qy.business.tools.SPUtils;
 import com.qy.business.tools.T;
 import com.qy.business.view.flow.FlowLayout;
@@ -58,12 +60,15 @@ public class SearchActivity extends BaseActivity <SearchPresenter,SearchModel> i
             return;
         }
 
+        goToSearch(key,mCurrentType);
+
         if(keywordList == null){
             keywordList = new ArrayList<>();
         }
         keywordList.add(new SearchKey(key,mCurrentType));
         SPUtils.putObject(this,SEARCH_KEY,keywordList);
         setSearchKey();
+
     }
     @OnClick(R.id.tv_clear)
     public void onClear(){
@@ -81,7 +86,7 @@ public class SearchActivity extends BaseActivity <SearchPresenter,SearchModel> i
             tvType.setText("商品");
             mCurrentType = GOODS;
         } else {
-            tvType.setText("店铺");
+            tvType.setText("供应商");
             mCurrentType = SHOP;
         }
     }
@@ -103,7 +108,10 @@ public class SearchActivity extends BaseActivity <SearchPresenter,SearchModel> i
             tagFlowLayoutHistory.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
                 @Override
                 public boolean onTagClick(View view, int position, FlowLayout parent) {
-
+                    SearchKey searchKey = keywordList.get(position);
+                    String name = searchKey.getName();
+                    int type = searchKey.getType();
+                    goToSearch(name,type);
                     return true;
                 }
             });
@@ -113,7 +121,7 @@ public class SearchActivity extends BaseActivity <SearchPresenter,SearchModel> i
             textViewClear.setVisibility(View.GONE);
         }
     }
-    private void setHotKey(List<SearchKey> list){
+    private void setHotKey(final List<SearchKey> list){
         final LayoutInflater mInflater = LayoutInflater.from(this);
         if(list != null && !list.isEmpty()){
             tagFlowLayoutHot.setAdapter(new TagAdapter<SearchKey>(list) {
@@ -125,6 +133,16 @@ public class SearchActivity extends BaseActivity <SearchPresenter,SearchModel> i
                     return tv;
                 }
             });
+            tagFlowLayoutHot.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+                @Override
+                public boolean onTagClick(View view, int position, FlowLayout parent) {
+                    SearchKey searchKey = list.get(position);
+                    String name = searchKey.getName();
+                    int type = searchKey.getType();
+                    goToSearch(name,type);
+                    return true;
+                }
+            });
         }else{
             tagFlowLayoutHot.removeAllViews();
         }
@@ -133,5 +151,13 @@ public class SearchActivity extends BaseActivity <SearchPresenter,SearchModel> i
     @Override
     public void showHotKey(List<SearchKey> list) {
         setHotKey(list);
+    }
+
+    private void goToSearch(String keyword,int type){
+        Intent intent = new Intent();
+        intent.putExtra("type",type);
+        intent.putExtra("keyword",keyword);
+        intent.setClass(this, SearchResultActivity.class);
+        startActivity(intent);
     }
 }

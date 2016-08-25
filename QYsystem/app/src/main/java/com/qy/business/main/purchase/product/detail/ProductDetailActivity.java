@@ -1,5 +1,6 @@
 package com.qy.business.main.purchase.product.detail;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.qy.business.bean.Ad;
 import com.qy.business.local.DataProvider;
 import com.qy.business.main.base.BaseActivity;
 import com.qy.business.main.home.adapter.BannerAdapter;
+import com.qy.business.main.purchase.product.pay.OrderPayActivity;
 import com.qy.business.tools.DensityUtils;
 import com.qy.business.view.AutoRollPagerView;
 import com.qy.business.view.BadgeView;
@@ -82,7 +84,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
      */
     @OnClick({R.id.tv_buy, R.id.tv_bottom_buy})
     public void buyNow() {
-
+        startActivity(new Intent(this, OrderPayActivity.class));
     }
 
     /**
