@@ -10,6 +10,8 @@ import com.qy.business.bean.GetAdresslistBean;
 import com.qy.business.config.Constant;
 import com.qy.business.main.base.BaseActivity;
 import com.qy.business.tools.SPUtils;
+import com.qy.business.view.DialogDelegate;
+import com.qy.business.view.SweetAlertDialogDelegate;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -39,6 +41,7 @@ public class OrderPayActivity extends BaseActivity<OrderPayPresenter,OrderPayMod
     private String mGoodsBusinessId = "100003477";
     private String mDefaultAddressId = "2526";
     private Handler handler = new Handler();
+    private DialogDelegate mDialogDelegate;
     @Override
     public int getLayoutId() {
         return R.layout.activity_order_pay;
@@ -46,12 +49,13 @@ public class OrderPayActivity extends BaseActivity<OrderPayPresenter,OrderPayMod
 
     @Override
     public void initView() {
-
+        mDialogDelegate = new SweetAlertDialogDelegate(this);
     }
 
     @OnClick(R.id.tv_commit)
     public void commitOrder(){
        // mPresenter.pay(mOrder);
+        mDialogDelegate.showProgressDialog(false,"正在提交订单...");
         new OrderThread().start();
     }
     @OnClick(R.id.btn_return)
@@ -60,7 +64,7 @@ public class OrderPayActivity extends BaseActivity<OrderPayPresenter,OrderPayMod
     }
     @Override
     public void paySucceed() {
-
+        mDialogDelegate.clearDialog();
     }
 
     @Override
@@ -116,6 +120,12 @@ public class OrderPayActivity extends BaseActivity<OrderPayPresenter,OrderPayMod
 //                                    public void onClick(DialogInterface dialog, int which) {
 //                                    }
 //                                }).create().show();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mDialogDelegate.stopProgressWithFailed("订单提交","订单提交失败");
+                            }
+                        });
                     } else {
                         JSONTokener jt = new JSONTokener(result);
                         JSONObject bean = (JSONObject) jt.nextValue();

@@ -37,6 +37,7 @@ public class OrderPayPresenter extends OrderPayContract.Presenter {
 
             @Override
             public void onResponse(String response, int id) {
+                mView.paySucceed();
                 AliPay(response);
             }
         });
