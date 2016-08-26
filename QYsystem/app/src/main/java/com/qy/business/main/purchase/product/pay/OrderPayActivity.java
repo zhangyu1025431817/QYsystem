@@ -1,5 +1,6 @@
 package com.qy.business.main.purchase.product.pay;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import com.qy.business.bean.AddressBean;
 import com.qy.business.bean.GetAdresslistBean;
 import com.qy.business.config.Constant;
 import com.qy.business.main.base.BaseActivity;
+import com.qy.business.main.purchase.product.pay.result.PayResultActivity;
 import com.qy.business.tools.SPUtils;
 import com.qy.business.view.DialogDelegate;
 import com.qy.business.view.SweetAlertDialogDelegate;
@@ -55,7 +57,7 @@ public class OrderPayActivity extends BaseActivity<OrderPayPresenter,OrderPayMod
     @OnClick(R.id.tv_commit)
     public void commitOrder(){
        // mPresenter.pay(mOrder);
-        mDialogDelegate.showProgressDialog(false,"正在提交订单...");
+        mDialogDelegate.showProgressDialog(true,"正在提交订单...");
         new OrderThread().start();
     }
     @OnClick(R.id.btn_return)
@@ -65,6 +67,12 @@ public class OrderPayActivity extends BaseActivity<OrderPayPresenter,OrderPayMod
     @Override
     public void paySucceed() {
         mDialogDelegate.clearDialog();
+    }
+
+    @Override
+    public void aliPaySucceed() {
+        startActivity(new Intent(this, PayResultActivity.class));
+        finish();
     }
 
     @Override

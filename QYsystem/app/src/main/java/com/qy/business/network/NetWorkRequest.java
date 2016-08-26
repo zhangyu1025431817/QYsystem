@@ -80,7 +80,7 @@ public class NetWorkRequest {
                 .observeOn(AndroidSchedulers.mainThread());
     }
     public static Observable<String> getAliPayOder(String order){
-        return Network.getApiService(ApiUrl.BASE_PERSONAL).getAliPayOrder(order)
+        return Network.getApiService().getAliPayOrder(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

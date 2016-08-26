@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/view_toolbar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="订单支付"
+            android:textColor="@color/white"
+            android:textSize="40px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200px"
+        android:src="@drawable/icon_pay_succeed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20px"
+        android:text="支付成功"
+        android:textColor="@color/title_text"
+        android:textSize="34px" />
+
+    <TextView
+        android:id="@+id/tv_order_detail"
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:layout_marginTop="40px"
+        android:background="@drawable/btn_background_gray_dark"
+        android:gravity="center"
+        android:text="订单详情"
+        android:textColor="@color/title_text"
+        android:textSize="26px" />
+
+    <TextView
+        android:id="@+id/tv_enter_shop"
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/btn_background_gray_dark"
+        android:gravity="center"
+        android:text="进入店铺"
+        android:textColor="@color/title_text"
+        android:textSize="26px" />
+</com.zhy.autolayout.AutoLinearLayout>

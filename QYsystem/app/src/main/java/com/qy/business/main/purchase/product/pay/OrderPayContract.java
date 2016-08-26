@@ -25,6 +25,7 @@ public interface OrderPayContract {
      }
     interface View extends BaseView {
         void paySucceed();
+        void aliPaySucceed();
         void payFailed(String msg);
         void showAddress(GetAdresslistBean bean);
     }
@@ -32,6 +33,7 @@ public interface OrderPayContract {
         abstract void buildOrder(List<String> key, List<String> value);
         abstract void pay(Activity mContext,String order);
         abstract void getAddressList(String binfo);
+
 
     }
 }

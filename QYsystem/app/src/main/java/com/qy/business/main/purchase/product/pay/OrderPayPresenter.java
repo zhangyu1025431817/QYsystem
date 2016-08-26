@@ -77,7 +77,7 @@ public class OrderPayPresenter extends OrderPayContract.Presenter {
 
                     @Override
                     public void onNext(PayResult payResult) {
-                        mView.paySucceed();
+                        mView.aliPaySucceed();
                     }
                 });
     }
